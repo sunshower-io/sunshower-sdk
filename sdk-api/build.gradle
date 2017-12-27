@@ -1,0 +1,17 @@
+dependencies {
+
+
+    compile project(':sdk-common')
+
+    compile 'io.sunshower.common:core'
+    
+    compile 'javax.ws.rs:javax.ws.rs-api:2.1'
+
+    
+    compile 'org.glassfish.jersey.media:jersey-media-sse:2.26'
+
+    compile 'org.eclipse.persistence:org.eclipse.persistence.core'
+
+    testCompile 'io.sunshower.test:test-common'
+    testCompile 'io.sunshower.test:test-persist'
+}

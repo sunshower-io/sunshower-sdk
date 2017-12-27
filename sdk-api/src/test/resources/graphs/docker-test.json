@@ -1,0 +1,247 @@
+{
+  "graph-type": "orchestration-template",
+  "type": "io.sunshower.sdk.v1.graph.model.GraphElement",
+  "vertices": {
+    "vertex": [
+      {
+        "id": "11WFWFpwbqw314tCNNZu",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 300,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwcakZCdXpe34K",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 10,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwcakZCdXpe34L",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 518,
+          "y": 102,
+          "width": 380,
+          "height": 100
+        }
+      },
+      {
+        "id": "11WFWFpwcakZCdXpe34M",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 300,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwcakZCdXpe34N",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 10,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwcakZCdXpe34P",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 563,
+          "y": 546,
+          "width": 380,
+          "height": 100
+        }
+      },
+      {
+        "id": "11WFWFpwcakZCdXpe34Q",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 300,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwdKa5QCBSuhYm",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 10,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwdKa5QCBSuhYo",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 609,
+          "y": 329,
+          "width": 380,
+          "height": 100
+        }
+      },
+      {
+        "id": "11WFWFpwdKa5QCBSuhZ3",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 300,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwe4Pbbkq5BN3F",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 10,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwe4Pbbkq5BN3V",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 304,
+          "y": 724,
+          "width": 380,
+          "height": 100
+        }
+      },
+      {
+        "id": "11WFWFpwe4Pbbkq5BN3Y",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 300,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpweoD7oKUhT2Xj",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 10,
+          "y": 15,
+          "width": 70,
+          "height": 70
+        }
+      },
+      {
+        "id": "11WFWFpwfY2dzt8Kih24",
+        "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+        "layout": {
+          "x": 335,
+          "y": 43,
+          "width": 380,
+          "height": 100
+        }
+      }
+    ]
+  },
+  "edges": {
+    "edge": [
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "11WFWFpwfY2dzt8Kih25",
+        "target": "gBxRy2yjuPMiYvts98h1hS"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "YMNkKXwPheaCzE9YGhVyXb",
+        "target": "gBxRy2yjuPMiYvts98h1hS",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "YMNkKXwPheaCzE9YGhVyXb",
+        "target": "cHYawWYjVp7FBjJQBSzCPw",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "k6Msvxinna9KeRGuauR6Uo",
+        "target": "cJRgKaTrULT2QSZGtFmSTH"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "YP994q3m195Kh3PuefJf3C",
+        "target": "cJRgKaTrULT2QSZGtFmSTH",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "YP994q3m195Kh3PuefJf3C",
+        "target": "k6Msvxinna9KeRGuauR6Uo",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "k4bHcF98u1dpE2KjLYHMth",
+        "target": "k6MsvwXbG86QfLZr3bbbLx"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "gB5LYHNfBnQTmtDRbhLruZ",
+        "target": "k6MsvwXbG86QfLZr3bbbLx",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "gB5LYHNfBnQTmtDRbhLruZ",
+        "target": "k4bHcF98u1dpE2KjLYHMth",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "cJS5Zgpd8DGcHnk8EhhqBE",
+        "target": "k6N5Tjsa45XnDBRqHVyZkL"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "gBxdb6AXjPzy7htwftGBCX",
+        "target": "k6N5Tjsa45XnDBRqHVyZkL",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "gBxdb6AXjPzy7htwftGBCX",
+        "target": "cJS5Zgpd8DGcHnk8EhhqBE",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "gCqKpK95VyJUdTPnHDCsJB",
+        "target": "YQ22psZtYXacJjqwqTAaUu"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "cHYPKTyDcSxoGojfqZTxL9",
+        "target": "YQ22psZtYXacJjqwqTAaUu",
+        "relationship": "parent"
+      },
+      {
+        "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+        "source": "cHYPKTyDcSxoGojfqZTxL9",
+        "target": "gCqKpK95VyJUdTPnHDCsJB",
+        "relationship": "parent"
+      }
+    ]
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "vertices": [
+    {
+      "id": "11WLpiCb6A5xFWJd8Gp7",
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "task-reference": "ComputeNodeTemplateElement",
+      "layout": {
+        "x": 862,
+        "y": 327,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "reference": "definition",
+        "content-type": "reference",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement"
+      }
+    },
+    {
+      "id": "11WLphxVquWnJwhHmdEX",
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "task-reference": "ComputeNodeTemplateElement",
+      "layout": {
+        "x": 689,
+        "y": 203,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "reference": "definition",
+        "content-type": "reference",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement"
+      }
+    },
+    {
+      "id": "11WLphuqgnhqrZ8j3Y95",
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "task-reference": "ComputeNodeTemplateElement",
+      "layout": {
+        "x": 689,
+        "y": 453,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "reference": "definition",
+        "content-type": "reference",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement"
+      }
+    },
+    {
+      "id": "11WLphsbLE2aCofZLR9R",
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "task-reference": "ComputeNodeTemplateElement",
+      "layout": {
+        "x": 689,
+        "y": 327,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "reference": "definition",
+        "content-type": "reference",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement"
+      }
+    },
+    {
+      "id": "11WLphkChvBEwQufFiVM",
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "task-reference": "ComputeNodeTemplateElement",
+      "layout": {
+        "x": 500,
+        "y": 333,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "reference": "definition",
+        "content-type": "reference",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "11WLphxVquWnJwhHmdEX",
+      "target": "11WLpiCb6A5xFWJd8Gp7",
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement"
+    },
+    {
+      "source": "11WLphuqgnhqrZ8j3Y95",
+      "target": "11WLpiCb6A5xFWJd8Gp7",
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement"
+    },
+    {
+      "source": "11WLphsbLE2aCofZLR9R",
+      "target": "11WLpiCb6A5xFWJd8Gp7",
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement"
+    },
+    {
+      "source": "11WLphkChvBEwQufFiVM",
+      "target": "11WLphsbLE2aCofZLR9R",
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement"
+    },
+    {
+      "source": "11WLphkChvBEwQufFiVM",
+      "target": "11WLphuqgnhqrZ8j3Y95",
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement"
+    },
+    {
+      "source": "11WLphkChvBEwQufFiVM",
+      "target": "11WLphxVquWnJwhHmdEX",
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement"
+    }
+  ],
+  "type": "io.sunshower.sdk.v1.graph.model.GraphElement",
+  "graph-type": "orchestration-template"
+}

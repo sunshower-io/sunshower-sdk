@@ -1,0 +1,185 @@
+{
+  "vertices": [
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "cJRgTVCxbw9YGTW861fgbH",
+      "name": "template cluster",
+      "task-reference": "TemplateClusterTemplate",
+      "layout": {
+        "x": 407,
+        "y": 75,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "content-type": "reference",
+        "reference": "definition"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "YMNYnmP5NccTuj6HNpjZa6",
+      "name": "node",
+      "layout": {
+        "x": 420,
+        "y": 170,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "content-type": "reference",
+        "reference": "definition"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "YQ22v9bMicy3zsvipaPGCa",
+      "name": "CJE",
+      "task-reference": "CJEInstallation",
+      "layout": {
+        "x": 504,
+        "y": 482,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "content-type": "reference",
+        "reference": "definition",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "gB4wCwNHGWWexqmSWYigsG",
+      "name": "node",
+      "task-reference": "ScriptTemplateElement",
+      "layout": {
+        "x": 115,
+        "y": 450,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "content-type": "reference",
+        "reference": "definition"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "cGf68npmyg8kB4GesAnYB5",
+      "name": "node",
+      "task-reference": "ScriptTemplateElement",
+      "layout": {
+        "x": 253,
+        "y": 450,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "content-type": "reference",
+        "reference": "definition"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "cGfgxK3xmD1UjtUDb7KNmt",
+      "name": "node",
+      "task-reference": "ScriptTemplateElement",
+      "layout": {
+        "x": 266,
+        "y": 289,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "content-type": "reference",
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "reference": "definition"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "k7EyMgXwLAnyPcvzVPAgPQ",
+      "name": "CJE",
+      "task-reference": "CJEInstallation",
+      "layout": {
+        "x": 140,
+        "y": 90,
+        "width": 74,
+        "height": 74,
+        "type": "io.sunshower.sdk.v1.graph.model.LayoutElement"
+      },
+      "content": {
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "content-type": "reference",
+        "reference": "definition"
+      }
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.VertexElement",
+      "id": "cHYnZaKz9C8fDviREaMKSo",
+      "name": "template cluster",
+      "task-reference": "TemplateClusterTemplate",
+      "layout": {
+        "x": 79,
+        "y": 235,
+        "width": 74,
+        "height": 74
+      },
+      "content": {
+        "type": "io.sunshower.sdk.v1.graph.model.ContentElement",
+        "content-type": "reference",
+        "reference": "definition"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "YMNYnmP5NccTuj6HNpjZa6",
+      "target": "cJRgTVCxbw9YGTW861fgbH"
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "YQ22v9bMicy3zsvipaPGCa",
+      "target": "YMNYnmP5NccTuj6HNpjZa6"
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "cGf68npmyg8kB4GesAnYB5",
+      "target": "YQ22v9bMicy3zsvipaPGCa"
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "cGf68npmyg8kB4GesAnYB5",
+      "target": "gB4wCwNHGWWexqmSWYigsG"
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "cGfgxK3xmD1UjtUDb7KNmt",
+      "target": "YMNYnmP5NccTuj6HNpjZa6"
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "k7EyMgXwLAnyPcvzVPAgPQ",
+      "target": "cGfgxK3xmD1UjtUDb7KNmt"
+    },
+    {
+      "type": "io.sunshower.sdk.v1.graph.model.EdgeElement",
+      "source": "cHYnZaKz9C8fDviREaMKSo",
+      "target": "k7EyMgXwLAnyPcvzVPAgPQ"
+    }
+  ],
+  "type": "io.sunshower.sdk.v1.graph.model.GraphElement",
+  "graph-type": "orchestration-template"
+}

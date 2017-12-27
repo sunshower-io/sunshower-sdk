@@ -1,0 +1,6 @@
+include (
+	'sdk-api', 
+	'sdk-common', 
+	'sdk-core', 
+	'sdk-specification'
+)

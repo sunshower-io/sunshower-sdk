@@ -1,0 +1,49 @@
+
+
+dependencies {
+    compile project(':sdk-api')
+
+
+    compile 'io.sunshower.common:core'
+    compile 'io.sunshower.common:common-ws'
+    compile 'io.sunshower.test:test-ws'
+
+    compile 'io.sunshower.service:service-api'
+    compile 'io.sunshower.service:service-core'
+    compile 'io.sunshower.service:service-security'
+
+
+    compile 'io.sunshower.persist:persist-jpa'
+
+    compile 'io.sunshower.persist:persist-hibernate'
+    compile 'org.springframework:spring-orm'
+
+
+
+
+    testCompile project(':sdk-specification')
+    compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy', version: '2.7.0'
+
+    compile 'org.glassfish.jersey.media:jersey-media-moxy'
+
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-jaxb'
+
+    testCompile 'io.sunshower.test:test-persist'
+    testCompile 'org.springframework:spring-test'
+    compile('org.glassfish.jersey.core:jersey-server')
+    compile 'org.glassfish.jersey.ext:jersey-proxy-client'
+    compile('org.glassfish.jersey.core:jersey-common')
+    compile 'org.springframework.security:spring-security-acl'
+    compile 'org.springframework.security:spring-security-config'
+
+    testCompile 'org.springframework.security:spring-security-test'
+    testCompile 'org.springframework.boot:spring-boot-test'
+    testCompile 'org.springframework.boot:spring-boot-starter-web'
+    "org.springframework.boot:spring-boot-starter-jersey"
+    testCompile "org.springframework.boot:spring-boot-starter-undertow"
+
+
+
+}
+
+
