@@ -1,5 +1,6 @@
 *.class
 **/publish.properties
+build-all.sh
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
