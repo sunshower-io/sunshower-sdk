@@ -34,9 +34,6 @@ public class CredentialsTest {
     public void ensureCredentialBuilderAPIForKeypairMakesSenseAndReturnsSuperclass() {
         final CredentialElement keypair = Credentials.keypair()
                 .withKey("key").andSecret("secret");
-
-
-
     }
 
 

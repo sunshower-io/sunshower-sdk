@@ -11,9 +11,6 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by gumerman on 5/25/17.
- */
 @RunWith(JUnitPlatform.class)
 public class CredentialMapperTest {
 

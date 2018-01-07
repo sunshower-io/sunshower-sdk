@@ -9,9 +9,6 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by haswell on 5/11/17.
- */
 public class DefaultUserEndpoint implements UserEndpoint {
 
     @Inject

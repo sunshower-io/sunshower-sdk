@@ -20,6 +20,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
 
@@ -43,7 +44,7 @@ public class DefaultSecurityEndpointTest extends SdkTest {
 
     @Test
     public void ensureSecurityEndpointThrowsCorrectExceptionWhenProvidedNullToken() {
-        assertThrows(IllegalStateException.class, () -> {
+        assertThrows(BadRequestException.class, () -> {
             securityEndpoint.authenticate((AuthenticationTokenElement) null);
         });
     }

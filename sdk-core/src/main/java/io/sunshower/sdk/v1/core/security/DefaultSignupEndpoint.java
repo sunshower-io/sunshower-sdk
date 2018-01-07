@@ -14,9 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by haswell on 5/8/17.
- */
 public class DefaultSignupEndpoint implements SignupEndpoint {
 
     @Inject

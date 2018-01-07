@@ -4,6 +4,7 @@ import io.sunshower.sdk.common.jaxb.CachingJAXBContextAwareMOxyJSONProvider;
 import io.sunshower.sdk.common.jaxb.DefaultJAXBContextResolver;
 import io.sunshower.sdk.core.IdentifierEndpoint;
 import io.sunshower.sdk.v1.core.FlakeIdentifierEndpoint;
+import io.sunshower.sdk.v1.core.OctetStreamWriter;
 import io.sunshower.sdk.v1.core.security.DefaultSignupEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultUserEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultSecurityEndpoint;
@@ -15,10 +16,16 @@ import io.sunshower.service.serialization.DynamicResolvingMoxyJsonProvider;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 
 @Configuration
 public class SdkConfiguration {
+    
+    @Bean
+    public OctetStreamWriter octetStreamWriter() {
+        return new OctetStreamWriter();
+    }
     
     
     @Bean
@@ -43,13 +50,13 @@ public class SdkConfiguration {
     }
 
 
-
     @Bean
     public ExceptionMappings exceptionMappings() {
         return new ExceptionMappings();
     }
 
     @Bean
+    @Primary
     public DynamicResolvingMoxyJsonProvider configurableMoxyJsonProvider(DynamicJaxrsProviders providers) {
         return new CachingJAXBContextAwareMOxyJSONProvider(providers);
     }

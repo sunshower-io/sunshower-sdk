@@ -2,15 +2,13 @@ package io.sunshower.sdk.v1.endpoints.core.security;
 
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-/**
- * Created by haswell on 5/11/17.
- */
 @Path("security/users")
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface UserEndpoint {
 
     @GET

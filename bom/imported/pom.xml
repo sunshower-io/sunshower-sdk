@@ -80,6 +80,11 @@
             <version>${sunshower-base.version}</version>
           </dependency>
 
+          <dependency>
+            <groupId>io.sunshower.common</groupId>
+            <artifactId>reflect</artifactId>
+            <version>${sunshower-base.version}</version>
+          </dependency>
 
           <dependency>
             <groupId>io.sunshower.common</groupId>

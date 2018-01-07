@@ -7,25 +7,24 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by haswell on 10/22/16.
- */
-
-
-
 
 @Provider
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
     static final Logger logger = Logger.getLogger(ExceptionMappings.class.getName());
@@ -69,6 +68,7 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
                 NotFoundException.class,
                 new NotFoundExceptionResponse()
         );
+        
     }
 
 

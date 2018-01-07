@@ -77,7 +77,6 @@ allprojects {
     plugins.withType(JavaPlugin) {
 
         dependencies {
-            compile 'javax.ws.rs:javax.ws.rs-api'
             compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
             compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
 
