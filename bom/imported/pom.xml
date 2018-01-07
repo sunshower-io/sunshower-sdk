@@ -18,11 +18,17 @@
 
     <properties>
       <sunshower-base.version>1.0.0-SNAPSHOT</sunshower-base.version>
+      <sunshower-kernel.version>1.0.0-SNAPSHOT</sunshower-kernel.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
+          
+          <dependency>
+            <groupId>io.sunshower.kernel</groupId>
+            <artifactId>kernel-api</artifactId>
+            <version>${sunshower-kernel.version}</version>
+          </dependency>
 
           <dependency>
             <groupId>io.sunshower.test</groupId>

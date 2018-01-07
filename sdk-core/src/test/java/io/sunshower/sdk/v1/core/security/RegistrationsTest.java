@@ -10,9 +10,6 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 5/8/17.
- */
 @RunWith(JUnitPlatform.class)
 class RegistrationsTest {
 

@@ -5,6 +5,8 @@ import io.sunshower.model.core.auth.UsernamePasswordCredential;
 import io.sunshower.sdk.v1.core.auth.model.KeyPairCredentialElement;
 import io.sunshower.sdk.v1.core.auth.model.UsernamePasswordCredentialElement;
 import org.junit.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -12,6 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Created by gumerman on 5/25/17.
  */
+@RunWith(JUnitPlatform.class)
 public class CredentialMapperTest {
 
     @Test

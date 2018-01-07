@@ -1,4 +1,4 @@
-package io.sunshower.sdk.v1.model.core.faults;
+package io.sunshower.sdk.faults;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

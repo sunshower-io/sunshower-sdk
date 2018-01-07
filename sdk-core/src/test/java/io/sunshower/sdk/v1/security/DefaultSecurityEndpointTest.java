@@ -2,20 +2,10 @@ package io.sunshower.sdk.v1.security;
 
 import io.sunshower.core.security.crypto.EncryptionService;
 import io.sunshower.sdk.test.SdkTest;
-import io.sunshower.sdk.test.SdkTestConfiguration;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
 import io.sunshower.sdk.v1.model.core.security.*;
-import io.sunshower.test.ws.RESTTest;
 import io.sunshower.test.ws.Remote;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
-import org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -33,11 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
 
-@EnableAutoConfiguration(exclude = {
-        SecurityAutoConfiguration.class,
-        WebMvcAutoConfiguration.class,
-        FlywayAutoConfiguration.class
-})
 public class DefaultSecurityEndpointTest extends SdkTest {
 
     @PersistenceContext

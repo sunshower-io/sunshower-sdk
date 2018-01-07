@@ -13,21 +13,17 @@ import io.sunshower.service.CoreServiceConfiguration;
 import io.sunshower.service.security.SecurityConfiguration;
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import io.sunshower.test.persist.AuthenticationTestExecutionListener;
 import io.sunshower.test.persist.Authority;
 import io.sunshower.test.persist.Principal;
-import io.sunshower.test.ws.RESTTest;
+import io.sunshower.test.ws.EnableJAXRS;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
@@ -46,12 +42,9 @@ import javax.inject.Inject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Created by haswell on 5/5/17.
- */
 @Rollback
-@RESTTest
-//@ExtendWith(SpringExtension.class)
+@EnableJAXRS
+@ExtendWith(SpringExtension.class)
 @RunWith(JUnitPlatform.class)
 @TestExecutionListeners(
         listeners = {
@@ -64,12 +57,8 @@ import java.util.concurrent.ConcurrentHashMap;
         },
         mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
 )
-@EnableAutoConfiguration(exclude = {
-        SecurityAutoConfiguration.class,
-        WebMvcAutoConfiguration.class,
-        FlywayAutoConfiguration.class
-})
 @ContextConfiguration(classes = {
+        TestConfigurationConfiguration.class,
         SdkConfiguration.class,
         CoreServiceConfiguration.class,
         SecurityConfiguration.class,
@@ -79,7 +68,6 @@ import java.util.concurrent.ConcurrentHashMap;
         SdkTestConfiguration.class,
 })
 @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class SdkTest extends SerializationTestCase {
 
     static final Map<String, String> passwords = new ConcurrentHashMap<>();

@@ -1,5 +1,6 @@
 dependencies {
 
+    compile 'javax.servlet:javax.servlet-api'
 
     compile project(':sdk-common')
 

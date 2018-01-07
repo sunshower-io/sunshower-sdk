@@ -13,7 +13,6 @@ import java.util.List;
 @Path("security/users")
 public interface UserEndpoint {
 
-
     @GET
     @Path("status/{active}")
     List<PrincipalElement> list(@PathParam("active") boolean active);

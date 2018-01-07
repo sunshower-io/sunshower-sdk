@@ -7,10 +7,6 @@ import io.sunshower.sdk.v1.model.core.security.*;
 import io.sunshower.service.signup.SignupService;
 import io.sunshower.test.ws.Remote;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.security.test.context.support.WithUserDetails;
 
 import javax.inject.Inject;
@@ -25,15 +21,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-/**
- * Created by haswell on 5/8/17.
- */
-
-@EnableAutoConfiguration(exclude = {
-        SecurityAutoConfiguration.class,
-        WebMvcAutoConfiguration.class,
-        FlywayAutoConfiguration.class
-})
 public class DefaultSignupEndpointTest extends SdkTest {
 
 

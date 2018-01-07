@@ -1,5 +1,7 @@
 package io.sunshower.sdk.v1.model.core.faults;
 
+import io.sunshower.sdk.faults.Fault;
+
 import javax.ws.rs.core.Response;
 
 /**

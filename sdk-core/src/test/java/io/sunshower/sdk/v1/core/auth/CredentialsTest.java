@@ -3,11 +3,11 @@ package io.sunshower.sdk.v1.core.auth;
 import io.sunshower.sdk.v1.core.auth.model.CredentialElement;
 import io.sunshower.sdk.v1.core.auth.model.KeyPairCredentialElement;
 import io.sunshower.sdk.v1.core.auth.model.UsernamePasswordCredentialElement;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
-/**
- * Created by gumerman on 5/24/17.
- */
+@RunWith(JUnitPlatform.class)
 public class CredentialsTest {
 
     @Test

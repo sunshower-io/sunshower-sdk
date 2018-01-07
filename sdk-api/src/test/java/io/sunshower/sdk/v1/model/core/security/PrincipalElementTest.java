@@ -3,10 +3,13 @@ package io.sunshower.sdk.v1.model.core.security;
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
+@RunWith(JUnitPlatform.class)
 class PrincipalElementTest extends SerializationTestCase {
 
     public PrincipalElementTest() {

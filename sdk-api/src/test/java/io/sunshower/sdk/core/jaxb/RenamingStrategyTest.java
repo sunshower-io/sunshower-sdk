@@ -1,19 +1,22 @@
 package io.sunshower.sdk.core.jaxb;
 
 import org.eclipse.persistence.oxm.XMLNameTransformer;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 5/4/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class RenamingStrategyTest {
+    
 
     private XMLNameTransformer transformer;
-    @Before
+    
+    @BeforeEach
     public void setUp() {
         transformer = new RenamingStrategy();
     }

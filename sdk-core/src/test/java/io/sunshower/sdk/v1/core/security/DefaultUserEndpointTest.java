@@ -10,11 +10,6 @@ import io.sunshower.test.persist.Principal;
 import io.sunshower.test.ws.Remote;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,15 +22,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Created by haswell on 5/11/17.
- */
-
-@EnableAutoConfiguration(exclude = {
-        SecurityAutoConfiguration.class,
-        WebMvcAutoConfiguration.class,
-        FlywayAutoConfiguration.class
-})
 public class DefaultUserEndpointTest extends SdkTest {
 
     @Remote

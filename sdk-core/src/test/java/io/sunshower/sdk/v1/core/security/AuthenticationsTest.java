@@ -3,7 +3,7 @@ package io.sunshower.sdk.v1.core.security;
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.model.core.security.RoleElement;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,9 +14,6 @@ import static io.sunshower.sdk.v1.core.security.Authentications.fromModel;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 5/10/17.
- */
 public class AuthenticationsTest {
 
     @Test
