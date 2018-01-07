@@ -17,7 +17,7 @@ public class SdkTestConfiguration {
     @Primary
     @Bean(name = TestConfigurations.TEST_CONFIGURATION_REPOSITORY_PATH)
     public String location() {
-        return "/sunshower-sdk/sdk-core/src/test/resources/";
+        return "/sunshower-sdk/sdk-core/src/test/resources";
     }
 
     @Bean
