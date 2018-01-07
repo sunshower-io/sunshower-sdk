@@ -26,6 +26,7 @@ dependencies {
     compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
 
     testCompile 'io.sunshower.test:test-persist'
+    testCompile 'org.junit.platform:junit-platform-runner'
     testCompile 'org.springframework:spring-test'
     compile 'org.springframework.security:spring-security-acl'
     compile 'org.springframework.security:spring-security-config'
