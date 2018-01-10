@@ -89,10 +89,10 @@ public class DefaultSecurityEndpointTest extends SdkTest {
 
         assertThat(principalElement, is(not(nullValue())));
         assertThat(principalElement.getUsername(), is("administrator"));
-        assertThat(principalElement.getRoles().size(), is(2));
+        assertThat(principalElement.getRoles().size(), is(1));
         Set<String> roleNames = principalElement.getRoles()
                 .stream().map(RoleElement::getAuthority).collect(Collectors.toSet());
-        assertThat(roleNames, is(new HashSet<>(Arrays.asList("admin", "tenant:user"))));
+        assertThat(roleNames, is(new HashSet<>(Arrays.asList("admin"))));
     }
 
 

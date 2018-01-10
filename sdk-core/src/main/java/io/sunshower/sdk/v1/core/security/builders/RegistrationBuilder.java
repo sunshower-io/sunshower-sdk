@@ -3,9 +3,6 @@ package io.sunshower.sdk.v1.core.security.builders;
 
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 
-/**
- * Created by haswell on 5/8/17.
- */
 public class RegistrationBuilder {
     public static class UsernameStep {
         private final String username;

@@ -1,4 +1,8 @@
 
+plugins {
+    id "net.ltgt.apt-idea" 
+}
+
 dependencies {
     compile project(':sdk-api')
 
@@ -11,6 +15,10 @@ dependencies {
     compile 'io.sunshower.service:service-api'
     compile 'io.sunshower.service:service-core'
     compile 'io.sunshower.service:service-security'
+
+    compile 'org.mapstruct:mapstruct-jdk8'
+
+    compile 'org.mapstruct:mapstruct-processor'
 
 
     compile 'io.sunshower.persist:persist-jpa'
@@ -38,5 +46,4 @@ dependencies {
 
 
 }
-
 

@@ -1,22 +1,22 @@
 package io.sunshower.sdk.v1.model.core.security;
 
+import io.sunshower.sdk.v1.model.core.element.AbstractElement;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Created by haswell on 5/10/17.
- */
+@Getter
+@Setter
+@AllArgsConstructor
 @XmlRootElement(name = "role")
-public class RoleElement {
-    
-    @XmlAttribute
-    private String authority;
+public class RoleElement extends AbstractElement<RoleElement> {
 
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
+  @XmlAttribute private String authority;
+  
+  public RoleElement() {
+      super(RoleElement.class);
+  }
 }

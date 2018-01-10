@@ -3,9 +3,6 @@ package io.sunshower.sdk.v1.model.core.security;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Created by haswell on 5/5/17.
- */
 @XmlRootElement(name = "authentication")
 public class AuthenticationElement {
 

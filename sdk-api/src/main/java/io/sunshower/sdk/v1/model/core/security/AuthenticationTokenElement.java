@@ -4,9 +4,6 @@ package io.sunshower.sdk.v1.model.core.security;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Created by haswell on 5/5/17.
- */
 @XmlRootElement(name = "token")
 public class AuthenticationTokenElement {
 

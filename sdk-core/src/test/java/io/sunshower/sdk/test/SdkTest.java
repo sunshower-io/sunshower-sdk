@@ -8,7 +8,7 @@ import io.sunshower.model.core.auth.User;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persist.hibernate.HibernateConfiguration;
 import io.sunshower.sdk.v1.SdkConfiguration;
-import io.sunshower.sdk.v1.model.core.element.Element;
+import io.sunshower.sdk.v1.model.core.element.PersistentElement;
 import io.sunshower.service.CoreServiceConfiguration;
 import io.sunshower.service.security.SecurityConfiguration;
 import io.sunshower.test.common.SerializationAware;
@@ -79,7 +79,7 @@ public abstract class SdkTest extends SerializationTestCase {
 
     public SdkTest() {
         this(SerializationAware.Format.JSON, new Class[]{
-                Element.class
+                PersistentElement.class
         });
     }
     

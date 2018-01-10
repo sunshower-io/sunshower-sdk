@@ -16,10 +16,12 @@ import io.sunshower.service.serialization.DynamicResolvingMoxyJsonProvider;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 
 
 @Configuration
+@Import(MappingConfiguration.class)
 public class SdkConfiguration {
     
     @Bean
