@@ -1,10 +1,7 @@
 package io.sunshower.sdk.v1.model.core.security;
 
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,52 +14,46 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder(builderMethodName = "create", buildMethodName = "newPrincipal")
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = "principal")
 @EqualsAndHashCode(callSuper = false)
 public class PrincipalElement extends AbstractElement<PrincipalElement> {
 
-    @XmlAttribute
-    private boolean active;
+  @XmlAttribute(name = "username")
+  private String username;
 
+  @XmlAttribute(name = "first-name")
+  private String firstName;
 
-    @XmlAttribute
-    private Date registered;
+  @XmlElement(name = "last-name")
+  private String lastName;
 
-    @XmlAttribute
-    private Date lastActive;
+  @XmlAttribute(name = "email-address")
+  private String emailAddress;
 
-    @XmlAttribute(name = "username")
-    private String username;
+  @XmlAttribute(name = "phone-number")
+  private String phoneNumber;
 
+  @XmlElement(name = "role")
+  @XmlElementWrapper(name = "roles")
+  private List<RoleElement> roles;
 
-    @XmlAttribute(name = "first-name")
-    private String firstName;
+  @XmlAttribute private boolean active;
 
+  @XmlAttribute private Date registered;
 
-    @XmlElement(name = "last-name")
-    private String lastName;
+  @XmlAttribute private Date lastActive;
 
+  {
+    setType(PrincipalElement.class);
+  }
 
-    @XmlAttribute(name = "email-address")
-    private String emailAddress;
-
-    @XmlAttribute(name = "phone-number")
-    private String phoneNumber;
-
-
-    @XmlElement(name = "role")
-    @XmlElementWrapper(name = "roles")
-    private List<RoleElement> roles;
-
-    public PrincipalElement() {
-        super(PrincipalElement.class);
+  public void addRole(RoleElement role) {
+    if (roles == null) {
+      roles = new ArrayList<>();
     }
-    
-    public void addRole(RoleElement role) {
-        if(roles == null) {
-            roles = new ArrayList<>();
-        }
-        roles.add(role);
-    }
-
+    roles.add(role);
+  }
 }

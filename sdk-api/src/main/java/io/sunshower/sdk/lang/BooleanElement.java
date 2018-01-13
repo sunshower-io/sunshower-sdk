@@ -17,4 +17,8 @@ public class BooleanElement extends Value<BooleanElement, Boolean> {
   public BooleanElement(Boolean b) {
     super(BooleanElement.class, b);
   }
+
+  public static BooleanElement valueOf(boolean v) {
+    return v ? True : False;
+  }
 }

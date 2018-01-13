@@ -8,24 +8,31 @@ import org.mapstruct.*;
 @Mapper(
   componentModel = "jsr330",
   unmappedTargetPolicy = ReportingPolicy.IGNORE,
-  uses = Roles.class
+  uses = {Roles.class, Users.class}
 )
 public interface Registrations {
-  @Mappings({@Mapping(source = "username", target = "username")})
+  @Mappings({
+    @Mapping(source = "username", target = "username"),
+    @Mapping(source = "emailAddress", target = "details.emailAddress")
+  })
   User toUser(RegistrationRequestElement request);
+  
+  @AfterMapping
+  default void setDetailsUser(@MappingTarget User user) {
+      user.getDetails().setUser(user);
+  }
+  
+  
 
+  @Mappings({
+    @Mapping(source = "user.username", target = "username"),
+    @Mapping(source = "user.details.emailAddress", target = "emailAddress"),
+    @Mapping(source = "requestId", target = "registrationId"),
+  })
   RegistrationRequestElement toElement(RegistrationRequest registrationRequest);
 
-  //    @Mappings({
-  //            @Mapping(source = "id", target = "id"),
-  //            @Mapping(source = "authority", target = "authority")
-  //    })
-  //    RegistrationRequestElement toElement(RegistrationRequest request);
-  //
-  //    @InheritInverseConfiguration
-  //    RegistrationRequest toModel(RegistrationRequest element);
-  //
-  //
-  //    User toUser(RegistrationRequestElement request);
+  @InheritInverseConfiguration
+  RegistrationRequest toModel(RegistrationRequestElement registrationRequestElement);
+
 
 }

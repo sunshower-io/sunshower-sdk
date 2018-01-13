@@ -30,7 +30,6 @@ class UsersTest {
   public void setUp() {
     user = new User();
     user.setActive(true);
-    user.setEnabled(true);
     user.setUsername("username");
     user.setPassword("password");
     user.getDetails().setEmailAddress("frap@dap.com");

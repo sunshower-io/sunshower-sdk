@@ -48,7 +48,7 @@ public class DefaultUserEndpointTest extends SdkTest {
     @Test
     public void ensureListingActiveUsersReturnsEmptyListWhenNoUsersExist() {
         changeSession("administrator");
-        assertThat(userEndpoint.list(true).size(), is(3));
+        assertThat(userEndpoint.list(true).size(), is(4));
     }
 
 

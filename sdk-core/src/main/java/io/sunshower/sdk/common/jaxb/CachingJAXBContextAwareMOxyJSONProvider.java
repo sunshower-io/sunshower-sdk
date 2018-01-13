@@ -13,9 +13,6 @@ import javax.xml.bind.JAXBException;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-/**
- * Created by haswell on 6/4/17.
- */
 
 @Produces({
         MediaType.APPLICATION_JSON,

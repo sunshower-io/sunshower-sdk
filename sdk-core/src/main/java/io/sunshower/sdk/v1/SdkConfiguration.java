@@ -2,9 +2,11 @@ package io.sunshower.sdk.v1;
 
 import io.sunshower.sdk.common.jaxb.CachingJAXBContextAwareMOxyJSONProvider;
 import io.sunshower.sdk.common.jaxb.DefaultJAXBContextResolver;
+import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.IdentifierEndpoint;
 import io.sunshower.sdk.v1.core.FlakeIdentifierEndpoint;
 import io.sunshower.sdk.v1.core.OctetStreamWriter;
+import io.sunshower.sdk.v1.core.security.DefaultActivationEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultSignupEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultUserEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultSecurityEndpoint;
@@ -23,6 +25,11 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 @Import(MappingConfiguration.class)
 public class SdkConfiguration {
+    
+    @Bean
+    public ActivationEndpoint activationEndpoint() {
+        return new DefaultActivationEndpoint();
+    }
     
     @Bean
     public OctetStreamWriter octetStreamWriter() {

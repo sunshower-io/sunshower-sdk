@@ -4,6 +4,7 @@ import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.MappingConfiguration;
 import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
+import io.sunshower.service.signup.RegistrationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
 @RunWith(JUnitPlatform.class)
@@ -40,6 +43,48 @@ class RegistrationsTest {
             .create();
     user = registrations.toUser(registration);
   }
+  
+  @Test
+  public void ensureRegistrationTransformationToRequestWorks() {
+      RegistrationRequest request = new RegistrationRequest();
+      request.setUser(user);
+      request.setRequestId("test");
+      registration = registrations.toElement(request);
+      assertThat(user, is(not(nullValue())));
+      assertThat(registration.getRegistrationId(), is("test"));
+      assertThat(registration.getEmailAddress(), is("test@gmail.com"));
+  }
+  
+  
+  @Test
+  public void ensureRegistrationRequestPopulatesEmailAddressAndDetails() {
+      RegistrationRequestElement registrationRequestElement = RegistrationRequestElement.newRegistration().phoneNumber("hello")
+              .lastName("from")
+              .firstName("the")
+              .password("otter")
+              .emailAddress("slide")
+              .username("mustve").create();
+
+      RegistrationRequest request = registrations.toModel(registrationRequestElement);
+      assertThat(request.getUser().getDetails().getEmailAddress(), is("slide"));
+  }
+  
+  @Test
+  public void ensureEnsureToUserIsMappedcorrectly() {
+
+      RegistrationRequestElement registrationRequestElement = RegistrationRequestElement.newRegistration().phoneNumber("hello")
+              .lastName("from")
+              .firstName("the")
+              .password("otter")
+              .emailAddress("slide")
+              .username("mustve").create();
+      User user = registrations.toUser(registrationRequestElement);
+      assertThat(user.getDetails(), is(not(nullValue())));
+      assertThat(user.getDetails().getEmailAddress(), is("slide"));
+      assertThat(user.getDetails().getUser(), is(user));
+  }
+  
+  
 
   @Test
   public void ensureRequestusernameIsCorrect() {
@@ -63,7 +108,7 @@ class RegistrationsTest {
 
   @Test
   public void ensureFieldsAreCopiedCorrectlyForEmail() {
-    assertThat(registration.getEmailAddress(), is("test@gmail.com"));
+    assertThat(user.getDetails().getEmailAddress(), is("test@gmail.com"));
   }
 
   @Test

@@ -18,6 +18,7 @@ import java.util.Date;
 public class ActivationElement extends AbstractElement<ActivationElement> {
   @XmlAttribute private String name;
   @XmlAttribute private Boolean active;
+  @XmlAttribute private String temporaryPassword;
 
   @XmlElement private PrincipalElement activator;
 
@@ -26,4 +27,7 @@ public class ActivationElement extends AbstractElement<ActivationElement> {
 
   @XmlElement private ApplicationElement application;
 
+  public ActivationElement() {
+    super(ActivationElement.class);
+  }
 }

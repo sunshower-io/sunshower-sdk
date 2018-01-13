@@ -55,6 +55,7 @@ class ActivationsTest {
   @Test
   public void ensureUserIsMappedCorrectly() {
     ActivationElement e = new ActivationElement();
+    e.setId(Identifier.random());
     PrincipalElement p = new PrincipalElement();
     p.setActive(true);
     p.setUsername("joe");
@@ -62,7 +63,6 @@ class ActivationsTest {
     e.setActivator(p);
     Activation model = activations.toModel(e);
     assertThat(model.getActivator(), is(not(nullValue())));
-    assertThat(model.getActivator().getId(), is(p.getId()));
     assertThat(model.getActivator().getUsername(), is(p.getUsername()));
   }
 }
