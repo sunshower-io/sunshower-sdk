@@ -7,15 +7,19 @@ import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("activate")
+@Path("activation")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface ActivationEndpoint {
+
+  @POST
+  @Path("/deactivate")
+  void deactivate();
 
   @GET
   BooleanElement isActive();
 
   @POST
-  @Path("/")
+  @Path("/activate")
   ActivationElement activate(PrincipalElement element);
 }

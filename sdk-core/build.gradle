@@ -1,6 +1,7 @@
 
 plugins {
-    id "net.ltgt.apt-idea" 
+    id "net.ltgt.apt" 
+//    id "net.ltgt.apt-idea"
 }
 
 dependencies {
@@ -18,6 +19,7 @@ dependencies {
 
     compile 'org.mapstruct:mapstruct-jdk8'
 
+    apt 'org.mapstruct:mapstruct-processor'
     compile 'org.mapstruct:mapstruct-processor'
 
 

@@ -20,7 +20,7 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
   @Inject private Activations activations;
 
   @Inject private EncryptionService encryptionService;
-  
+
   @Inject private ActivationService activationService;
 
   static final SecureRandom random = new SecureRandom();
@@ -32,6 +32,11 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
       ch[i] = alphabet[random.nextInt(20)];
     }
     return new String(ch);
+  }
+
+  @Override
+  public void deactivate() {
+      activationService.deactivate();
   }
 
   @Override
