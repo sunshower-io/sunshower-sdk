@@ -55,7 +55,7 @@ class DefaultActivationEndpointTest extends SdkTest {
         .emailAddress("josiah@gmail.com")
         .firstName("josiah")
         .lastName("haswell")
-        .phoneNumber("970-581-3189")
+        .phoneNumber("999-999-9999")
         .newPrincipal();
   }
 }
