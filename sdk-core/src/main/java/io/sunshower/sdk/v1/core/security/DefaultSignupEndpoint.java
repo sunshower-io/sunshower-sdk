@@ -1,6 +1,8 @@
 package io.sunshower.sdk.v1.core.security;
 
 import io.sunshower.common.Identifier;
+import io.sunshower.model.core.auth.User;
+import io.sunshower.sdk.lang.IdentifierElement;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.core.faults.DuplicateElementException;
@@ -36,9 +38,9 @@ public class DefaultSignupEndpoint implements SignupEndpoint {
   }
 
   @Override
-  public String approve(String id) {
-    signupService.approve(id);
-    return id;
+  public IdentifierElement approve(String id) {
+    User user = signupService.approve(id);
+    return new IdentifierElement(user.getId());
   }
 
   @Override

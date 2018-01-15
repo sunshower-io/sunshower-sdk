@@ -17,7 +17,6 @@ public class ValueAdapter extends XmlAdapter<String, Object> {
         if("false".equals(lv) || "true".equals(lv)) {
             return Boolean.valueOf(lv);
         }
-        
         return Identifier.valueOf(v);
         
     }

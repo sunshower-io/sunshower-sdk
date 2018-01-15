@@ -1,5 +1,7 @@
 package io.sunshower.sdk.v1.endpoints.core.security;
 
+import io.sunshower.common.Identifier;
+import io.sunshower.sdk.lang.BooleanElement;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 
 import javax.ws.rs.*;
@@ -11,9 +13,11 @@ import java.util.List;
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface UserEndpoint {
 
-    @GET
-    @Path("status/{active}")
-    List<PrincipalElement> list(@PathParam("active") boolean active);
+  @DELETE
+  @Path("/{id}")
+  BooleanElement delete(@PathParam("id") Identifier userid);
 
-
+  @GET
+  @Path("status/{active}")
+  List<PrincipalElement> list(@PathParam("active") boolean active);
 }
