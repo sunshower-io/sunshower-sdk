@@ -17,10 +17,10 @@ dependencies {
     compile 'io.sunshower.service:service-core'
     compile 'io.sunshower.service:service-security'
 
-    compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+    compile 'org.mapstruct:mapstruct-jdk8'
 
-    apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
-    compile 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+    apt 'org.mapstruct:mapstruct-processor'
+    compile 'org.mapstruct:mapstruct-processor'
 
 
     compile 'io.sunshower.persist:persist-jpa'
@@ -28,15 +28,15 @@ dependencies {
     compile 'io.sunshower.persist:persist-hibernate'
     compile 'org.springframework:spring-orm'
 
-    compile group: 'org.jboss.spec.javax.ws.rs', name: 'jboss-jaxrs-api_2.0_spec', version: '1.0.0.Final'
+    compile 'org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.0_spec'
 
 
     compile 'org.springframework.security:spring-security-acl'
     compile 'org.springframework.security:spring-security-config'
+    compile 'javax.validation:validation-api'
 
-    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
-    compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
+    compile 'commons-fileupload:commons-fileupload'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
 
     testCompile 'io.sunshower.test:test-ws'
     testCompile project(':sdk-specification')
