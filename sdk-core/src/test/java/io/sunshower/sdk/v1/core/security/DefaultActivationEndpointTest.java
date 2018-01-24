@@ -5,6 +5,8 @@ import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.model.ActivationElement;
 import io.sunshower.sdk.test.SdkTest;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
+import io.sunshower.sdk.v1.model.core.security.Authenticate;
+import io.sunshower.sdk.v1.model.core.security.AuthenticationRequest;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.PermissionsService;
 import io.sunshower.test.ws.Remote;
@@ -36,6 +38,9 @@ class DefaultActivationEndpointTest extends SdkTest {
       ActivationElement activate = activationEndpoint.activate(principal);
       assertThat(activationEndpoint.isActive().getValue(), is(true));
       assertThat(activate.getActivator().getPassword(), is(nullValue()));
+      AuthenticationRequest request =
+          Authenticate.as(principal.getUsername()).withPassword(principal.getPassword());
+      securityEndpoint.authenticate(request);
     } finally {
       permissionsService.impersonate(
           () -> {

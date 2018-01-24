@@ -50,6 +50,7 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
     String password = element.getPassword();
     String encryptedPassword = encryptionService.encrypt(password);
     user.setPassword(encryptedPassword);
+    user.setActive(true);
     ActivationElement activation = activations.toElement(activationService.activate(user));
     return activation;
   }
