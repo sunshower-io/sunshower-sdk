@@ -40,6 +40,13 @@
         <scope>import</scope>
       </dependency>
 
+      <dependency>
+        <groupId>io.sunshower.kernel</groupId>
+        <artifactId>bom-exported</artifactId>
+        <version>${sunshower-kernel.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
     </dependencies>
   </dependencyManagement>

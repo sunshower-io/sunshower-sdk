@@ -47,11 +47,10 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
   @Override
   public ActivationElement activate(PrincipalElement element) {
     User user = users.toModel(element);
-    String password = random();
+    String password = element.getPassword();
     String encryptedPassword = encryptionService.encrypt(password);
     user.setPassword(encryptedPassword);
     ActivationElement activation = activations.toElement(activationService.activate(user));
-    activation.setTemporaryPassword(password);
     return activation;
   }
 }

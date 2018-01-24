@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 import javax.inject.Inject;
 
@@ -49,6 +50,15 @@ class UsersTest {
 
       principalElement = users.toElement(user);
       assertThat(principalElement.getEmailAddress(), is("frap@dap.com"));
+      assertThat(principalElement.getPassword(), is(nullValue()));
+      
+  }
+  
+  @Test
+  public void ensurePasswordIsCopiedFromElementToUser() {
+      principalElement.setPassword("beanasaur");
+      user = users.toModel(principalElement);
+      assertThat(user.getPassword(), is("beanasaur"));
       
   }
 

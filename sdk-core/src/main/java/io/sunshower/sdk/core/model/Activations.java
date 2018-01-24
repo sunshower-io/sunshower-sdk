@@ -16,6 +16,7 @@ public interface Activations {
     @Mapping(target = "application", ignore = true),
     @Mapping(target = "activator", source = "activator"),
     @Mapping(source = "activator.id", target = "activator.id"),
+    @Mapping(target = "activator.password", ignore = true),
     @Mapping(source = "activationDate", target = "activationDate")
   })
   ActivationElement toElement(Activation activation);

@@ -16,10 +16,12 @@ public interface Users {
     @Mapping(source = "username", target = "username"),
     @Mapping(source = "active", target = "active"),
     @Mapping(source = "roles", target = "roles"),
+    @Mapping(target = "password", ignore = true),
     @Mapping(source = "user.details.emailAddress", target = "emailAddress")
   })
   PrincipalElement toElement(User user);
 
   @InheritInverseConfiguration
+  @Mappings({@Mapping(target = "password", source = "password")})
   User toModel(PrincipalElement principalElement);
 }

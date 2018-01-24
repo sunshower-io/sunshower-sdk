@@ -35,6 +35,9 @@ public class PrincipalElement extends AbstractElement<PrincipalElement> {
 
   @XmlAttribute(name = "phone-number")
   private String phoneNumber;
+ 
+  @XmlAttribute(name = "password")
+  private String password;
 
   @XmlElement(name = "role")
   @XmlElementWrapper(name = "roles")

@@ -5,8 +5,6 @@ import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.model.ActivationElement;
 import io.sunshower.sdk.test.SdkTest;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
-import io.sunshower.sdk.v1.model.core.security.Authenticate;
-import io.sunshower.sdk.v1.model.core.security.AuthenticationRequest;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.PermissionsService;
 import io.sunshower.test.ws.Remote;
@@ -14,7 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class DefaultActivationEndpointTest extends SdkTest {
@@ -32,12 +31,11 @@ class DefaultActivationEndpointTest extends SdkTest {
 
   @Test
   public void ensureActivatingAndDeactivatingWork() {
-
     try {
       PrincipalElement principal = getPrincipalElement();
-      activationEndpoint.activate(principal);
+      ActivationElement activate = activationEndpoint.activate(principal);
       assertThat(activationEndpoint.isActive().getValue(), is(true));
-
+      assertThat(activate.getActivator().getPassword(), is(nullValue()));
     } finally {
       permissionsService.impersonate(
           () -> {
@@ -56,6 +54,7 @@ class DefaultActivationEndpointTest extends SdkTest {
         .firstName("josiah")
         .lastName("haswell")
         .phoneNumber("999-999-9999")
+        .password("test")
         .newPrincipal();
   }
 }
