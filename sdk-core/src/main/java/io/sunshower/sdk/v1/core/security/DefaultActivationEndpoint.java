@@ -23,17 +23,6 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
 
   @Inject private ActivationService activationService;
 
-  static final SecureRandom random = new SecureRandom();
-  static final char[] alphabet = Base58.Alphabets.Default.getAlphabet();
-
-  String random() {
-    char[] ch = new char[20];
-    for (int i = 0; i < 20; i++) {
-      ch[i] = alphabet[random.nextInt(20)];
-    }
-    return new String(ch);
-  }
-
   @Override
   public void deactivate() {
       activationService.deactivate();
