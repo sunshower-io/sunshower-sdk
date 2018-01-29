@@ -13,11 +13,11 @@ import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.NotAuthorizedException;
-
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DefaultSignupEndpointTest extends SdkTest {
@@ -53,7 +53,9 @@ public class DefaultSignupEndpointTest extends SdkTest {
             .lastName("whatever")
             .phoneNumber("970-581-1999")
             .create();
-    signupEndpoint.signup(e);
+    RegistrationConfirmationElement signup = signupEndpoint.signup(e);
+    assertThat(signup.getPrincipal().getUsername(), is("usernameasdfasfasdf"));
+    assertThat(signup.getRegistrationId(), is(not(nullValue())));
 
     try {
       signupEndpoint.list().size();

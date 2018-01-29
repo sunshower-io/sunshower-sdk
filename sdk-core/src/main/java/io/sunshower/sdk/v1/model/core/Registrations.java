@@ -1,6 +1,7 @@
 package io.sunshower.sdk.v1.model.core;
 
 import io.sunshower.model.core.auth.User;
+import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.signup.RegistrationRequest;
 import org.mapstruct.*;
@@ -16,13 +17,11 @@ public interface Registrations {
     @Mapping(source = "emailAddress", target = "details.emailAddress")
   })
   User toUser(RegistrationRequestElement request);
-  
+
   @AfterMapping
   default void setDetailsUser(@MappingTarget User user) {
-      user.getDetails().setUser(user);
+    user.getDetails().setUser(user);
   }
-  
-  
 
   @Mappings({
     @Mapping(source = "user.username", target = "username"),
@@ -34,5 +33,11 @@ public interface Registrations {
   @InheritInverseConfiguration
   RegistrationRequest toModel(RegistrationRequestElement registrationRequestElement);
 
-
+  @Mappings({
+    @Mapping(source = "requestId", target = "registrationId"),
+    @Mapping(source = "user.username", target = "principal.username"),
+    @Mapping(source = "user.details.firstname", target = "principal.firstName"),
+    @Mapping(source = "user.details.lastname", target = "principal.lastName"),
+  })
+  RegistrationConfirmationElement toConfirmation(RegistrationRequest signup);
 }

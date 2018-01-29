@@ -3,6 +3,7 @@ package io.sunshower.sdk.v1.core.security;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.MappingConfiguration;
 import io.sunshower.sdk.v1.model.core.Registrations;
+import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.signup.RegistrationRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -129,5 +130,31 @@ class RegistrationsTest {
   @Test
   public void ensureFieldsAreCopiedCorrectlyForPhoneNumber() {
     assertThat(registration.getPhoneNumber(), is("frapper"));
+  }
+  
+  
+  @Test
+  public void ensurRequestIdIsCopiedCorrectly() {
+      
+      final RegistrationRequest request = new RegistrationRequest();
+      request.setRequestId("hello");
+
+      RegistrationConfirmationElement element = registrations.toConfirmation(request);
+      assertThat(element.getRegistrationId(), is("hello"));
+  }
+  
+  @Test
+  public void ensureUserIsCopiedCorrectly() {
+      final RegistrationRequest request = new RegistrationRequest();
+      request.setRequestId("hello");
+      final User user = new User();
+      user.setUsername("frapper");
+      user.getDetails().setFirstname("josiah");
+      user.getDetails().setLastname("haswell");
+      request.setUser(user);
+      RegistrationConfirmationElement element = registrations.toConfirmation(request);
+      assertThat(element.getPrincipal().getUsername(), is("frapper"));
+      assertThat(element.getPrincipal().getFirstName(), is("josiah"));
+      assertThat(element.getPrincipal().getLastName(), is("haswell"));
   }
 }

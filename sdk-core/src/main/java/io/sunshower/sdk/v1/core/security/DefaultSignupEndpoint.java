@@ -6,7 +6,10 @@ import io.sunshower.sdk.lang.IdentifierElement;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.core.faults.DuplicateElementException;
+import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
+import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
+import io.sunshower.service.signup.RegistrationRequest;
 import io.sunshower.service.signup.SignupService;
 
 import javax.inject.Inject;
@@ -20,9 +23,12 @@ public class DefaultSignupEndpoint implements SignupEndpoint {
   @Inject private SignupService signupService;
 
   @Override
-  public void signup(RegistrationRequestElement request) {
+  public RegistrationConfirmationElement signup(RegistrationRequestElement request) {
     try {
-      signupService.signup(registrations.toUser(request));
+      final User user = registrations.toUser(request);
+      final RegistrationRequest signup = signupService.signup(user);
+
+      return registrations.toConfirmation(signup);
     } catch (PersistenceException ex) {
       throw new DuplicateElementException("username and e-mail address must be unique");
     }
