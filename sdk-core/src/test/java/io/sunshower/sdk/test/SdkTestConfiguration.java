@@ -1,5 +1,6 @@
 package io.sunshower.sdk.test;
 
+import io.sunshower.kernel.api.PluginManager;
 import io.sunshower.persistence.Dialect;
 import io.sunshower.service.model.io.FileResolutionStrategy;
 import io.sunshower.test.common.TestConfigurations;
@@ -12,6 +13,11 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 @Configuration
 public class SdkTestConfiguration {
+    
+    @Bean
+    public PluginManager pluginManager() {
+        return new MockPluginManager();
+    }
     
 
     @Primary

@@ -2,6 +2,7 @@ package io.sunshower.sdk.v1.endpoints.core.security;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.sdk.lang.IdentifierElement;
+import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 
@@ -19,6 +20,10 @@ import java.util.List;
   MediaType.APPLICATION_XML,
 })
 public interface SignupEndpoint {
+
+  @GET
+  @Path("/approved")
+  List<PrincipalElement> approvedUsers();
 
   @GET
   List<RegistrationRequestElement> list();

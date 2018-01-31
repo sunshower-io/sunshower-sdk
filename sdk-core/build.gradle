@@ -9,6 +9,7 @@ dependencies {
     compile project(':sdk-api')
 
     compileOnly 'io.sunshower.kernel:kernel-api'
+    testCompile 'io.sunshower.kernel:kernel-api'
 
     compile 'io.sunshower.common:core'
     compile 'io.sunshower.common:common-ws'

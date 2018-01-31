@@ -1,7 +1,7 @@
 package io.sunshower.sdk.kernel;
 
 import io.sunshower.common.Identifier;
-import io.sunshower.sdk.kernel.model.PluginDescriptorElement;
+import io.sunshower.sdk.kernel.model.ExtensionPointDescriptorElement;
 import io.sunshower.sdk.kernel.model.PluginState;
 import io.sunshower.sdk.kernel.model.PluginUploadFault;
 
@@ -12,18 +12,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("plugins")
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-public interface PluginEndpoint {
+@Path("extensions")
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+public interface ExtensionEndpoint {
 
   @GET
   @Path("/")
-  List<PluginDescriptorElement> list();
-  
+  List<ExtensionPointDescriptorElement> list();
+
   @GET
   @Path("{id}")
-  PluginDescriptorElement get(@PathParam("id") Identifier id);
-  
+  ExtensionPointDescriptorElement get(@PathParam("id") Identifier id);
 
   @POST
   @Path("deploy")

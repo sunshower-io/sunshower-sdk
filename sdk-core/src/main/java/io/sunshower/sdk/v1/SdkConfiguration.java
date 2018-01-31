@@ -1,15 +1,19 @@
 package io.sunshower.sdk.v1;
 
+import io.sunshower.kernel.api.PluginManager;
 import io.sunshower.sdk.common.jaxb.CachingJAXBContextAwareMOxyJSONProvider;
 import io.sunshower.sdk.common.jaxb.DefaultJAXBContextResolver;
 import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.IdentifierEndpoint;
+import io.sunshower.sdk.core.model.Extensions;
+import io.sunshower.sdk.kernel.DefaultExtensionEndpoint;
+import io.sunshower.sdk.kernel.ExtensionEndpoint;
 import io.sunshower.sdk.v1.core.FlakeIdentifierEndpoint;
 import io.sunshower.sdk.v1.core.OctetStreamWriter;
 import io.sunshower.sdk.v1.core.security.DefaultActivationEndpoint;
+import io.sunshower.sdk.v1.core.security.DefaultSecurityEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultSignupEndpoint;
 import io.sunshower.sdk.v1.core.security.DefaultUserEndpoint;
-import io.sunshower.sdk.v1.core.security.DefaultSecurityEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
@@ -21,10 +25,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 
 @Configuration
 @Import(MappingConfiguration.class)
 public class SdkConfiguration {
+    
+    @Bean
+    public ExtensionEndpoint extensionEndpoint() {
+        return new DefaultExtensionEndpoint();
+    }
+    
+    @Bean
+    public Extensions extensionsTransformer() {
+        return new Extensions() {
+        };
+    }
+    
+    @Bean
+    public PluginManager pluginManager() throws NamingException {
+        return InitialContext.doLookup("java:global/sunshower/kernel/plugin-manager");
+    }
     
     @Bean
     public ActivationEndpoint activationEndpoint() {
