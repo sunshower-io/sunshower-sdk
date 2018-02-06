@@ -45,6 +45,11 @@ allprojects {
         classifier = 'sources'
         from sourceSets.main.allSource
     }
+    
+    task testArtifacts(type: Jar, dependsOn: testClasses) {
+        classifier = 'tests'
+        from sourceSets.test.output
+    }
 
 
     dependencies {
@@ -113,6 +118,9 @@ allprojects {
 
                 artifact sourceJar {
                     classifier "sources"
+                }
+                artifact testArtifacts {
+                    classifier "tests"
                 }
             }
         }
