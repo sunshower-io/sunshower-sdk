@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,15 +16,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "authentication")
 public class AuthenticationRequest {
 
-    @XmlElement
-    private String username;
+  @XmlElement private String username;
 
+  @XmlElement private String password;
 
-    @XmlElement
-    private String password;
-
-
-    public AuthenticationElement at(SecurityEndpoint securityEndpoint) {
-        return securityEndpoint.authenticate(this);
-    }
+  public AuthenticationElement at(SecurityEndpoint securityEndpoint) {
+    return securityEndpoint.authenticate(this);
+  }
 }

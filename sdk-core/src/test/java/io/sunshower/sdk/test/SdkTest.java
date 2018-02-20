@@ -7,9 +7,13 @@ import io.sunshower.model.core.auth.Role;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persist.hibernate.HibernateConfiguration;
+import io.sunshower.sdk.core.ActivationEndpoint;
+import io.sunshower.sdk.core.model.ActivationElement;
 import io.sunshower.sdk.v1.SdkConfiguration;
 import io.sunshower.sdk.v1.model.core.element.PersistentElement;
+import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.CoreServiceConfiguration;
+import io.sunshower.service.security.Action;
 import io.sunshower.service.security.SecurityConfiguration;
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
@@ -18,6 +22,7 @@ import io.sunshower.test.persist.AuthenticationTestExecutionListener;
 import io.sunshower.test.persist.Authority;
 import io.sunshower.test.persist.Principal;
 import io.sunshower.test.ws.EnableJAXRS;
+import io.sunshower.test.ws.Remote;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,6 +44,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,7 +58,7 @@ import java.util.concurrent.ConcurrentHashMap;
                 DependencyInjectionTestExecutionListener.class,
                 DirtiesContextTestExecutionListener.class,
                 TransactionalTestExecutionListener.class,
-                AuthenticationTestExecutionListener.class,
+//                AuthenticationTestExecutionListener.class,
                 WithSecurityContextTestExecutionListener.class
         },
         mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
@@ -71,10 +77,16 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class SdkTest extends SerializationTestCase {
 
     static final Map<String, String> passwords = new ConcurrentHashMap<>();
+    
+    @Remote
+    private ActivationEndpoint activationEndpoint; 
 
     static {
         TestSecurityContextHolder.initialize();
     }
+    
+    
+    
 
 
     public SdkTest() {
@@ -143,6 +155,19 @@ public abstract class SdkTest extends SerializationTestCase {
         noRoles.getDetails().setEmailAddress("dfasdfasdf");
         noRoles.setActive(true);
         return noRoles;
+    }
+    
+    protected TestAction withPrincipals(PrincipalElement... principles) {
+        final PrincipalAction action = new PrincipalAction(activationEndpoint);
+        for(PrincipalElement principal : principles) {
+            try {
+                ActivationElement activate = activationEndpoint.activate(principal);
+                action.addPrincipal(activate, principal.getPassword());
+            } catch(Exception ex) {
+                
+            }
+        }
+        return action;
     }
 
     protected synchronized void changeSession(String username) {

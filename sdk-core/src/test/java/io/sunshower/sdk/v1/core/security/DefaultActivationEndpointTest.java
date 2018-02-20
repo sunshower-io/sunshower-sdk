@@ -11,6 +11,8 @@ import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.PermissionsService;
 import io.sunshower.test.ws.Remote;
 import org.junit.jupiter.api.Test;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 
@@ -32,6 +34,7 @@ class DefaultActivationEndpointTest extends SdkTest {
   }
 
   @Test
+  @Transactional(propagation = Propagation.NESTED) 
   public void ensureActivatingAndDeactivatingWork() {
     try {
       PrincipalElement principal = getPrincipalElement();

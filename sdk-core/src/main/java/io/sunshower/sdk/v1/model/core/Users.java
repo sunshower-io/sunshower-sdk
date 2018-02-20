@@ -22,6 +22,9 @@ public interface Users {
   PrincipalElement toElement(User user);
 
   @InheritInverseConfiguration
-  @Mappings({@Mapping(target = "password", source = "password")})
+  @Mappings({
+    @Mapping(target = "password", source = "password"),
+    @Mapping(target = "roles", ignore = true)
+  })
   User toModel(PrincipalElement principalElement);
 }

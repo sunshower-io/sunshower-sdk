@@ -22,4 +22,7 @@ public interface ActivationEndpoint {
   @POST
   @Path("/activate")
   ActivationElement activate(PrincipalElement element);
+
+  @DELETE
+  void delete(ActivationElement e);
 }

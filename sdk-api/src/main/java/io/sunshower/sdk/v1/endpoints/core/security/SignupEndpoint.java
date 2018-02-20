@@ -36,6 +36,10 @@ public interface SignupEndpoint {
   @Path("{id}/revoke")
   String revoke(@PathParam("id") Identifier id);
 
+  @DELETE
+  @Path("{id}")
+  RegistrationRequestElement delete(@PathParam("id") String id);
+
   @PUT
   RegistrationConfirmationElement signup(RegistrationRequestElement request);
 }

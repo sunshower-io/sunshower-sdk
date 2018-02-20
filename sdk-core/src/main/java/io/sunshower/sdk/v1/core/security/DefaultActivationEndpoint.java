@@ -1,7 +1,6 @@
 package io.sunshower.sdk.v1.core.security;
 
 import io.sunshower.core.security.crypto.EncryptionService;
-import io.sunshower.encodings.Base58;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.model.ActivationElement;
@@ -12,7 +11,6 @@ import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.ActivationService;
 
 import javax.inject.Inject;
-import java.security.SecureRandom;
 
 public class DefaultActivationEndpoint implements ActivationEndpoint {
 
@@ -25,7 +23,7 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
 
   @Override
   public void deactivate() {
-      activationService.deactivate();
+    activationService.deactivate();
   }
 
   @Override
@@ -40,7 +38,11 @@ public class DefaultActivationEndpoint implements ActivationEndpoint {
     String encryptedPassword = encryptionService.encrypt(password);
     user.setPassword(encryptedPassword);
     user.setActive(true);
-    ActivationElement activation = activations.toElement(activationService.activate(user));
-    return activation;
+    return activations.toElement(activationService.activate(user));
+  }
+
+  @Override
+  public void delete(ActivationElement e) {
+    activationService.delete(activations.toModel(e));
   }
 }

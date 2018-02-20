@@ -16,10 +16,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -44,48 +42,58 @@ class RegistrationsTest {
             .create();
     user = registrations.toUser(registration);
   }
-  
+
+  @Test
+  public void ensureIdIsMapped() {
+    registration.setRegistrationId("id");
+    RegistrationRequest request = registrations.toModel(registration);
+    assertThat(request.getRequestId(), is("id"));
+  }
+
   @Test
   public void ensureRegistrationTransformationToRequestWorks() {
-      RegistrationRequest request = new RegistrationRequest();
-      request.setUser(user);
-      request.setRequestId("test");
-      registration = registrations.toElement(request);
-      assertThat(user, is(not(nullValue())));
-      assertThat(registration.getRegistrationId(), is("test"));
-      assertThat(registration.getEmailAddress(), is("test@gmail.com"));
+    RegistrationRequest request = new RegistrationRequest();
+    request.setUser(user);
+    request.setRequestId("test");
+    registration = registrations.toElement(request);
+    assertThat(user, is(not(nullValue())));
+    assertThat(registration.getRegistrationId(), is("test"));
+    assertThat(registration.getEmailAddress(), is("test@gmail.com"));
   }
-  
-  
+
   @Test
   public void ensureRegistrationRequestPopulatesEmailAddressAndDetails() {
-      RegistrationRequestElement registrationRequestElement = RegistrationRequestElement.newRegistration().phoneNumber("hello")
-              .lastName("from")
-              .firstName("the")
-              .password("otter")
-              .emailAddress("slide")
-              .username("mustve").create();
+    RegistrationRequestElement registrationRequestElement =
+        RegistrationRequestElement.newRegistration()
+            .phoneNumber("hello")
+            .lastName("from")
+            .firstName("the")
+            .password("otter")
+            .emailAddress("slide")
+            .username("mustve")
+            .create();
 
-      RegistrationRequest request = registrations.toModel(registrationRequestElement);
-      assertThat(request.getUser().getDetails().getEmailAddress(), is("slide"));
+    RegistrationRequest request = registrations.toModel(registrationRequestElement);
+    assertThat(request.getUser().getDetails().getEmailAddress(), is("slide"));
   }
-  
+
   @Test
   public void ensureEnsureToUserIsMappedcorrectly() {
 
-      RegistrationRequestElement registrationRequestElement = RegistrationRequestElement.newRegistration().phoneNumber("hello")
-              .lastName("from")
-              .firstName("the")
-              .password("otter")
-              .emailAddress("slide")
-              .username("mustve").create();
-      User user = registrations.toUser(registrationRequestElement);
-      assertThat(user.getDetails(), is(not(nullValue())));
-      assertThat(user.getDetails().getEmailAddress(), is("slide"));
-      assertThat(user.getDetails().getUser(), is(user));
+    RegistrationRequestElement registrationRequestElement =
+        RegistrationRequestElement.newRegistration()
+            .phoneNumber("hello")
+            .lastName("from")
+            .firstName("the")
+            .password("otter")
+            .emailAddress("slide")
+            .username("mustve")
+            .create();
+    User user = registrations.toUser(registrationRequestElement);
+    assertThat(user.getDetails(), is(not(nullValue())));
+    assertThat(user.getDetails().getEmailAddress(), is("slide"));
+    assertThat(user.getDetails().getUser(), is(user));
   }
-  
-  
 
   @Test
   public void ensureRequestusernameIsCorrect() {
@@ -131,30 +139,29 @@ class RegistrationsTest {
   public void ensureFieldsAreCopiedCorrectlyForPhoneNumber() {
     assertThat(registration.getPhoneNumber(), is("frapper"));
   }
-  
-  
+
   @Test
   public void ensurRequestIdIsCopiedCorrectly() {
-      
-      final RegistrationRequest request = new RegistrationRequest();
-      request.setRequestId("hello");
 
-      RegistrationConfirmationElement element = registrations.toConfirmation(request);
-      assertThat(element.getRegistrationId(), is("hello"));
+    final RegistrationRequest request = new RegistrationRequest();
+    request.setRequestId("hello");
+
+    RegistrationConfirmationElement element = registrations.toConfirmation(request);
+    assertThat(element.getRegistrationId(), is("hello"));
   }
-  
+
   @Test
   public void ensureUserIsCopiedCorrectly() {
-      final RegistrationRequest request = new RegistrationRequest();
-      request.setRequestId("hello");
-      final User user = new User();
-      user.setUsername("frapper");
-      user.getDetails().setFirstname("josiah");
-      user.getDetails().setLastname("haswell");
-      request.setUser(user);
-      RegistrationConfirmationElement element = registrations.toConfirmation(request);
-      assertThat(element.getPrincipal().getUsername(), is("frapper"));
-      assertThat(element.getPrincipal().getFirstName(), is("josiah"));
-      assertThat(element.getPrincipal().getLastName(), is("haswell"));
+    final RegistrationRequest request = new RegistrationRequest();
+    request.setRequestId("hello");
+    final User user = new User();
+    user.setUsername("frapper");
+    user.getDetails().setFirstname("josiah");
+    user.getDetails().setLastname("haswell");
+    request.setUser(user);
+    RegistrationConfirmationElement element = registrations.toConfirmation(request);
+    assertThat(element.getPrincipal().getUsername(), is("frapper"));
+    assertThat(element.getPrincipal().getFirstName(), is("josiah"));
+    assertThat(element.getPrincipal().getLastName(), is("haswell"));
   }
 }

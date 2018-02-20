@@ -13,18 +13,20 @@ import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.signup.RegistrationRequest;
 import io.sunshower.service.signup.SignupService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Transactional
 public class DefaultSignupEndpoint implements SignupEndpoint {
 
-@PersistenceContext
-private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
   @Inject private Registrations registrations;
   @Inject private SignupService signupService;
   @Inject private Users users;
@@ -44,8 +46,12 @@ private EntityManager entityManager;
   @Override
   @PreAuthorize("hasAuthority('admin')")
   public List<PrincipalElement> approvedUsers() {
-      return entityManager.createQuery("select e from User e where e.active = true", User.class).getResultList()
-              .stream().map(users::toElement).collect(Collectors.toList());
+    return entityManager
+        .createQuery("select e from User e where e.active = true", User.class)
+        .getResultList()
+        .stream()
+        .map(users::toElement)
+        .collect(Collectors.toList());
   }
 
   @Override
@@ -67,5 +73,23 @@ private EntityManager entityManager;
   public String revoke(Identifier id) {
     signupService.revoke(id);
     return id.toString();
+  }
+
+  @Override
+  public RegistrationRequestElement delete(String id) {
+    List<RegistrationRequest> requests =
+        entityManager
+            .createQuery(
+                "select r from RegistrationRequest r where r.requestId = :id",
+                RegistrationRequest.class)
+            .setParameter("id", id)
+            .getResultList();
+    if (!requests.isEmpty()) {
+      RegistrationRequest request = requests.get(0);
+      entityManager.remove(request);
+      entityManager.flush();
+      return registrations.toElement(request);
+    }
+    throw new NoSuchElementException("No registration request with that id");
   }
 }
