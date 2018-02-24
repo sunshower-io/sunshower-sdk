@@ -23,7 +23,7 @@ public class PropertyElement<U, T extends PropertyElement<U, T>> extends Abstrac
   @XmlAnyElement(lax = true)
   private U value;
 
-  @XmlTransient private final transient Method valueOf;
+  private final transient Method valueOf;
 
   public PropertyElement() {
     this.valueOf = configure();
