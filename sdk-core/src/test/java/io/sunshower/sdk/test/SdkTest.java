@@ -58,7 +58,8 @@ import java.util.concurrent.ConcurrentHashMap;
                 DependencyInjectionTestExecutionListener.class,
                 DirtiesContextTestExecutionListener.class,
                 TransactionalTestExecutionListener.class,
-//                AuthenticationTestExecutionListener.class,
+//                AuthenticationTestExecutionListener.class,,
+
                 WithSecurityContextTestExecutionListener.class
         },
         mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
