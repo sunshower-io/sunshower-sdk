@@ -104,7 +104,7 @@ public class DefaultSecurityEndpointTest extends SdkTest {
                             final PrincipalElement principalElement = result.getPrincipal();
 
                             assertThat(principalElement, is(not(nullValue())));
-                            assertThat(principalElement.getUsername(), is("administrator"));
+                            assertThat(principalElement.getUsername(), is("administrator1"));
                             assertThat(principalElement.getRoles().size(), is(3));
                             Set<String> roleNames =
                                     principalElement
