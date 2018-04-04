@@ -20,11 +20,12 @@ public class PropertyElement extends AbstractElement<PropertyElement> {
   @XmlAttribute(name = "property-type")
   private PropertyType propertyType;
 
-  @XmlAttribute private String value;
 
   @XmlAttribute private String key;
 
   @XmlAttribute private String name;
+
+  @XmlAttribute private String value;
 
   {
     setType(PropertyElement.class);
