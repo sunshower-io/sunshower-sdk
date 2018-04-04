@@ -1,7 +1,6 @@
 package io.sunshower.sdk.v1.model.core.element;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.eclipse.persistence.oxm.XMLRoot;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,67 +12,22 @@ import java.util.stream.Stream;
 
 @Getter
 @Setter
-public class PropertyElement<U, T extends PropertyElement<U, T>> extends AbstractElement<T> {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class PropertyElement extends AbstractElement<PropertyElement> {
 
-  @XmlAttribute String key;
+  @XmlAttribute(name = "property-type")
+  private PropertyType propertyType;
 
-  @XmlAttribute String name;
+  @XmlAttribute private String value;
 
-  @XmlAnyElement(lax = true)
-  private U value;
+  @XmlAttribute private String key;
 
-  private static transient Method valueOf;
+  @XmlAttribute private String name;
 
-  public PropertyElement() {
-    this.valueOf = configure(getClass());
+  {
+    setType(PropertyElement.class);
   }
 
-  public PropertyElement(String key, String name, U value) {
-    this();
-    this.key = key;
-    this.name = name;
-    this.value = value;
-  }
-
-  @SuppressWarnings("unchecked")
-  protected void doUnmarshal() {
-    try {
-      if (valueOf != null) {
-        this.value = (U) valueOf.invoke(this, ((XMLRoot) value).getObject());
-      }
-    } catch (Exception ex) {
-      throw new RuntimeException(ex);
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  public void afterUnmarshal(Unmarshaller u, Object parent) {
-    doUnmarshal();
-  }
-
-  protected static Method configure(Class<?> type) {
-    if (valueOf != null) {
-      return valueOf;
-    }
-    final ParameterizedType superclass = (ParameterizedType) type.getGenericSuperclass();
-    final Object vt = superclass.getActualTypeArguments()[0];
-
-    if (vt.getClass().equals(Class.class)) {
-      Class<?> valueType = (Class<?>) vt;
-      return Stream.of(valueType.getDeclaredMethods())
-          .filter(t -> t.getName().equals("valueOf") && t.getParameterCount() == 1)
-          .filter(
-              t -> {
-                final Class<?>[] ptypes = t.getParameterTypes();
-                final Class<?> ptype = ptypes[0];
-                return String.class.equals(ptype) || Object.class.equals(ptype);
-              })
-          .findFirst()
-          .orElseThrow(
-              () ->
-                  new IllegalArgumentException(
-                      "Type does not supply a public, static method valueOf() accepting a string"));
-    }
-    return null;
-  }
 }

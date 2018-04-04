@@ -1,11 +1,9 @@
 package io.sunshower.sdk.v1.model.core.element;
 
-import io.sunshower.common.rs.TypeAttributeClassExtractor;
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -17,8 +15,7 @@ class PropertyAwareElementTest extends SerializationTestCase {
         new Class<?>[] {
           String.class,
           Long.class,
-          LongPropertyElement.class,
-          StringPropertyElement.class,
+          PropertyElement.class,
           TestPropertyAwareElement.class
         });
   }
@@ -32,17 +29,15 @@ class PropertyAwareElementTest extends SerializationTestCase {
   @Test
   public void ensureWritingElementWorks() {
     TestPropertyAwareElement el = new TestPropertyAwareElement();
-    el.addProperty(new LongPropertyElement("frapper", "dapper", 1L));
-    el.addProperty(new StringPropertyElement("hello", "world", "value"));
+    el.addProperty(new PropertyElement(PropertyType.Integer, "frapper", "dapper", "1"));
+    el.addProperty(new PropertyElement(PropertyType.String, "hello", "world", "value"));
     TestPropertyAwareElement copy = copy(el);
     assertThat(copy.getProperties().size(), is(2));
     write(el, System.out);
-    PropertyElement<?, ?> propertyElement = copy.getProperties().get(0);
-    assertThat(propertyElement, is(instanceOf(LongPropertyElement.class)));
+    PropertyElement propertyElement = copy.getProperties().get(0);
     System.out.println(propertyElement.getValue());
-    assertThat(propertyElement.getValue(), is(1L));
+    assertThat(propertyElement.getValue(), is("1"));
     propertyElement = copy.getProperties().get(1);
-    assertThat(propertyElement, is(instanceOf(StringPropertyElement.class)));
     assertThat(propertyElement.getValue(), is("value"));
   }
 }

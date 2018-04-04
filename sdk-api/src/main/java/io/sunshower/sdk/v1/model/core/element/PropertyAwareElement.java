@@ -14,9 +14,9 @@ public class PropertyAwareElement<E extends PropertyAwareElement<E>> extends Abs
 
   @XmlElement
   @XmlElementWrapper(name = "property")
-  private List<PropertyElement<?, ?>> properties;
+  private List<PropertyElement> properties;
 
-  public void addProperty(PropertyElement<?, ?> el) {
+  public void addProperty(PropertyElement el) {
     if (properties == null) {
       properties = new ArrayList<>();
     }
