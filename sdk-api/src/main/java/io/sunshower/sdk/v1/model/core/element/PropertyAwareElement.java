@@ -12,8 +12,8 @@ import java.util.List;
 @Setter
 public class PropertyAwareElement<E extends PropertyAwareElement<E>> extends AbstractElement<E> {
 
-  @XmlElement
-  @XmlElementWrapper(name = "property")
+  @XmlElement(name = "property")
+  @XmlElementWrapper(name = "properties")
   private List<PropertyElement> properties;
 
   public void addProperty(PropertyElement el) {
