@@ -24,6 +24,7 @@ import java.util.List;
 import static io.sunshower.sdk.test.TestRoles.administrator;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DefaultUserEndpointTest extends SdkTest {
@@ -42,14 +43,14 @@ public class DefaultUserEndpointTest extends SdkTest {
         .perform(
             () -> {
               changeSession("administrator");
-              assertThat(userEndpoint.list(true).size(), is(1));
+              assertTrue(userEndpoint.list(true).size() > 0);
             });
   }
 
   IdentifierElement id;
 
   @Test
-  public void ensureSavingAndDeletingUserWorks() {
+  void ensureSavingAndDeletingUserWorks() {
     try {
       RegistrationRequestElement registrationRequestElement =
           RegistrationRequestElement.newRegistration()
@@ -64,7 +65,7 @@ public class DefaultUserEndpointTest extends SdkTest {
       permissionsService.impersonate(
           () -> {
             List<RegistrationRequestElement> list = signupEndpoint.list();
-            assertThat(list.size(), is(1));
+            assertTrue(signupEndpoint.list().stream().anyMatch(t -> "wabbab".equals(t.getUsername())));
             id = signupEndpoint.approve(list.get(0).getRegistrationId());
           },
           new Role("admin"));
@@ -140,7 +141,7 @@ public class DefaultUserEndpointTest extends SdkTest {
         .perform(
             () -> {
               changeSession("administrator");
-              assertThat(userEndpoint.list(false).size(), is(0));
+              assertTrue(userEndpoint.list(false).stream().noneMatch(PrincipalElement::isActive));
             });
   }
 
