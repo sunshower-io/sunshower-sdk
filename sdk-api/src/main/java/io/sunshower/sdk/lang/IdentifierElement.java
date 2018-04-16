@@ -8,15 +8,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "id")
 public class IdentifierElement extends Value<IdentifierElement, Identifier> {
 
-    public IdentifierElement() {
-        
-    }
-    
-    public IdentifierElement(Identifier value) {
-        super(IdentifierElement.class, value);
-    }
-    
-    public static IdentifierElement random() {
-        return new IdentifierElement(Identifier.random());
-    }
+  public IdentifierElement() {}
+
+  public IdentifierElement(Identifier value) {
+    super(IdentifierElement.class, value);
+  }
+
+  public static IdentifierElement random() {
+    return new IdentifierElement(Identifier.random());
+  }
+
+  public static IdentifierElement from(Identifier id) {
+    return new IdentifierElement(id);
+  }
 }

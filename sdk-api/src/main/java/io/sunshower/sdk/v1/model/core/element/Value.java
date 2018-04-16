@@ -1,11 +1,13 @@
 package io.sunshower.sdk.v1.model.core.element;
 
 import io.sunshower.sdk.v1.model.core.converters.ValueAdapter;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+@ToString
 @XmlRootElement(name = "value")
 public abstract class Value<T extends Value<T, V>, V> extends Element<T> {
 

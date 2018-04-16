@@ -7,37 +7,30 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.Providers;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-
-@Produces({
-        MediaType.APPLICATION_JSON,
-        MediaType.WILDCARD,
-        "application/x-javascript"
-})
-@Consumes({
-        MediaType.APPLICATION_JSON,
-        MediaType.WILDCARD
-})
+@Provider
+@Produces({MediaType.APPLICATION_JSON, MediaType.WILDCARD, "application/x-javascript"})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.WILDCARD})
 public class CachingJAXBContextAwareMOxyJSONProvider extends DynamicResolvingMoxyJsonProvider {
 
-    public CachingJAXBContextAwareMOxyJSONProvider(Providers providers) {
-        super(providers);
-        this.setWrapperAsArrayName(true);
-    }
+  public CachingJAXBContextAwareMOxyJSONProvider(Providers providers) {
+    super(providers);
+    this.setWrapperAsArrayName(true);
+  }
 
-
-    @Override
-    public JAXBContext getJAXBContext(
-            Set<Class<?>> domainClasses,
-            Annotation[] annotations,
-            MediaType mediaType,
-            MultivaluedMap<String, ?> httpHeaders
-    ) throws JAXBException {
-        return super.getJAXBContext(domainClasses, annotations, mediaType, httpHeaders);
-    }
+  @Override
+  public JAXBContext getJAXBContext(
+      Set<Class<?>> domainClasses,
+      Annotation[] annotations,
+      MediaType mediaType,
+      MultivaluedMap<String, ?> httpHeaders)
+      throws JAXBException {
+    return super.getJAXBContext(domainClasses, annotations, mediaType, httpHeaders);
+  }
 }

@@ -1,12 +1,14 @@
 package io.sunshower.sdk.v1.core.auth.model;
 
 
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Created by gumerman on 5/24/17.
- */
+@ToString
+@XmlRootElement(name = "username-password")
 public class UsernamePasswordCredentialElement extends CredentialElement {
 
     @XmlAttribute

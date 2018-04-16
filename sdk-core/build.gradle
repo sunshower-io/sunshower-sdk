@@ -1,4 +1,6 @@
 dependencies {
+
+    implementation 'org.jboss.resteasy:resteasy-jaxrs'
     
     compile project(':sdk-api')
 

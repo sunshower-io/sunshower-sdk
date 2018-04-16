@@ -28,74 +28,71 @@ import org.springframework.context.annotation.Primary;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-
 @Configuration
 @Import(MappingConfiguration.class)
 public class SdkConfiguration {
-    
-    @Bean
-    public ExtensionEndpoint extensionEndpoint() {
-        return new DefaultExtensionEndpoint();
-    }
-    
-    @Bean
-    public Extensions extensionsTransformer() {
-        return new Extensions() {
-        };
-    }
-    
-    @Bean
-    public PluginManager pluginManager() throws NamingException {
-        return InitialContext.doLookup("java:global/sunshower/kernel/plugin-manager");
-    }
-    
-    @Bean
-    public ActivationEndpoint activationEndpoint() {
-        return new DefaultActivationEndpoint();
-    }
-    
-    @Bean
-    public OctetStreamWriter octetStreamWriter() {
-        return new OctetStreamWriter();
-    }
-    
-    
-    @Bean
-    public IdentifierEndpoint identifierEndpoint() {
-        return new FlakeIdentifierEndpoint();
-    }
 
+  @Bean
+  public ExtensionEndpoint extensionEndpoint() {
+    return new DefaultExtensionEndpoint();
+  }
 
-    @Bean
-    public UserEndpoint userEndpoint() {
-        return new DefaultUserEndpoint();
-    }
+  @Bean
+  public Extensions extensionsTransformer() {
+    return new Extensions() {};
+  }
 
-    @Bean
-    public SignupEndpoint signupEndpoint() {
-        return new DefaultSignupEndpoint();
-    }
+  @Bean
+  public PluginManager pluginManager() throws NamingException {
+    return InitialContext.doLookup("java:global/sunshower/kernel/plugin-manager");
+  }
 
-    @Bean
-    public SecurityEndpoint securityEndpoint() {
-        return new DefaultSecurityEndpoint();
-    }
+  @Bean
+  public ActivationEndpoint activationEndpoint() {
+    return new DefaultActivationEndpoint();
+  }
 
+  @Bean
+  public OctetStreamWriter octetStreamWriter() {
+    return new OctetStreamWriter();
+  }
 
-    @Bean
-    public ExceptionMappings exceptionMappings() {
-        return new ExceptionMappings();
-    }
+  @Bean
+  public IdentifierEndpoint identifierEndpoint() {
+    return new FlakeIdentifierEndpoint();
+  }
 
-    @Bean
-    @Primary
-    public DynamicResolvingMoxyJsonProvider configurableMoxyJsonProvider(DynamicJaxrsProviders providers) {
-        return new CachingJAXBContextAwareMOxyJSONProvider(providers);
-    }
+  @Bean
+  public UserEndpoint userEndpoint() {
+    return new DefaultUserEndpoint();
+  }
 
-    @Bean
-    public DefaultJAXBContextResolver jaxbContextResolver(final MOXyJsonProvider provider) {
-        return new DefaultJAXBContextResolver(((CachingJAXBContextAwareMOxyJSONProvider) provider));
-    }
+  @Bean
+  public SignupEndpoint signupEndpoint() {
+    return new DefaultSignupEndpoint();
+  }
 
+  @Bean
+  public SecurityEndpoint securityEndpoint() {
+    return new DefaultSecurityEndpoint();
+  }
+
+  @Bean
+  public ExceptionMappings exceptionMappings() {
+    return new ExceptionMappings();
+  }
+
+  @Bean
+  @Primary
+  public DynamicResolvingMoxyJsonProvider configurableMoxyJsonProvider(
+      DynamicJaxrsProviders providers) {
+    CachingJAXBContextAwareMOxyJSONProvider cachingJAXBContextAwareMOxyJSONProvider =
+        new CachingJAXBContextAwareMOxyJSONProvider(providers);
+    return cachingJAXBContextAwareMOxyJSONProvider;
+  }
+
+  @Bean
+  public DefaultJAXBContextResolver jaxbContextResolver(final MOXyJsonProvider provider) {
+    return new DefaultJAXBContextResolver(((CachingJAXBContextAwareMOxyJSONProvider) provider));
+  }
 }
