@@ -11,7 +11,7 @@ public class Ticker implements ChannelSource<Frap>, Runnable {
   @Override
   public void start() {
     this.running = true;
-    new Thread(this).start();
+    run();
   }
 
   @Override

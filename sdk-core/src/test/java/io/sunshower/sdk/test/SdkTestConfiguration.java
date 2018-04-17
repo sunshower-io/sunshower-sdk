@@ -25,13 +25,12 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 @Configuration
 public class SdkTestConfiguration {
 
-
-//  @Bean
-//  public MoxySseEventProvider moxySseEventProvider() {
-//    final MoxySseEventProvider provider = new MoxySseEventProvider(new MOXyJsonProvider());
-//    ResteasyProviderFactory.getInstance().registerProviderInstance(provider);
-//    return provider;
-//  }
+  //  @Bean
+  //  public MoxySseEventProvider moxySseEventProvider() {
+  //    final MoxySseEventProvider provider = new MoxySseEventProvider(new MOXyJsonProvider());
+  //    ResteasyProviderFactory.getInstance().registerProviderInstance(provider);
+  //    return provider;
+  //  }
 
   @Bean
   public SseEventProvider sseEventProvider() {
@@ -44,8 +43,8 @@ public class SdkTestConfiguration {
   }
 
   @Bean
-  public ChannelSelector channelSelector() {
-    return new ReactiveChannelSelector();
+  public ChannelSelector channelSelector(ExecutorService service) {
+    return new ReactiveChannelSelector(service);
   }
 
   @Bean

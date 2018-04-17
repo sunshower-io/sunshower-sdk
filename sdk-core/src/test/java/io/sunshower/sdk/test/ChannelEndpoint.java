@@ -26,13 +26,27 @@ public interface ChannelEndpoint {
   @Consumes("*/*")
   String getMediaType(@Context MediaType mediaType);
 
+
   @GET
   @Path("ticker")
   IdentifierElement newTicker();
 
   @GET
+  @Path("newMessages")
+  IdentifierElement newMessages();
+
+  @GET
   @Path("{id}/start")
   void start(@PathParam("id") Identifier id);
+
+  @GET
+  @Path("{id}/messages")
+  @Produces(MediaType.SERVER_SENT_EVENTS)
+  void messages(
+      @PathParam("id") Identifier id,
+      @Context SseEventSink sink,
+      @Context Sse see,
+      @Context MediaType mediaType);
 
   @GET
   @Path("{id}/channel")
