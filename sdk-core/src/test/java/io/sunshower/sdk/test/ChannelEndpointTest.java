@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 class ChannelEndpointTest extends SdkTest {
 
@@ -84,7 +85,7 @@ class ChannelEndpointTest extends SdkTest {
     }
 
     assertThat(e.stream().allMatch(Objects::nonNull), is(true));
-    assertThat(e.size(), is(10));
+    assertTrue(e.size() >= 10);
   }
 
   @Test
@@ -122,6 +123,6 @@ class ChannelEndpointTest extends SdkTest {
     }
 
     assertThat(e.stream().allMatch(Objects::nonNull), is(true));
-    assertThat(e.size(), is(10));
+    assertTrue(e.size() >= 10);
   }
 }
