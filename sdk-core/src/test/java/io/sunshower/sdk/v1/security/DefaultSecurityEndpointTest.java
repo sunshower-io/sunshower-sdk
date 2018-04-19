@@ -31,89 +31,89 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:/sql/drop-roles.sql")
+@Sql(
+  executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+  scripts = "classpath:/sql/drop-roles.sql"
+)
 public class DefaultSecurityEndpointTest extends SdkTest {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
-    @Remote
-    private SecurityEndpoint securityEndpoint;
+  @Remote private SecurityEndpoint securityEndpoint;
 
-    @Remote
-    private SignupEndpoint endpoint;
+  @Remote private SignupEndpoint endpoint;
 
-    @Inject
-    private EncryptionService encryptionService;
+  @Inject private EncryptionService encryptionService;
 
-    @Test
-    @BeforeEach
-    public void ensureSecurityEndpointIsInjected() {
-        assertThat(securityEndpoint, is(not(nullValue())));
-    }
+  @Test
+  @BeforeEach
+  public void ensureSecurityEndpointIsInjected() {
+    assertThat(securityEndpoint, is(not(nullValue())));
+  }
 
-    @Test
-    public void ensureSecurityEndpointThrowsCorrectExceptionWhenProvidedNullToken() {
-        assertThrows(
-                BadRequestException.class,
-                () -> {
-                    securityEndpoint.authenticate((AuthenticationTokenElement) null);
-                });
-    }
+  @Test
+  public void ensureSecurityEndpointThrowsCorrectExceptionWhenProvidedNullToken() {
+    assertThrows(
+        BadRequestException.class,
+        () -> {
+          securityEndpoint.authenticate((AuthenticationTokenElement) null);
+        });
+  }
 
-    @Test
-    public void ensureAuthenticateThrows405WhenProvidedNullTokenComponent() {
-        AuthenticationTokenElement element = new AuthenticationTokenElement(null);
-        assertThrows(
-                NotAuthorizedException.class,
-                () -> {
-                    securityEndpoint.authenticate(element);
-                });
-    }
+  @Test
+  public void ensureAuthenticateThrows405WhenProvidedNullTokenComponent() {
+    AuthenticationTokenElement element = new AuthenticationTokenElement(null);
+    assertThrows(
+        NotAuthorizedException.class,
+        () -> {
+          securityEndpoint.authenticate(element);
+        });
+  }
 
-    @Test
-    public void ensureAuthenticatingWithInvalidUsernameProducesSaneException() {
-        assertThrows(
-                NotFoundException.class,
-                () -> {
-                    Authenticate.as(null).withPassword("frapper").at(securityEndpoint);
-                });
-    }
+  @Test
+  public void ensureAuthenticatingWithInvalidUsernameProducesSaneException() {
+    assertThrows(
+        NotFoundException.class,
+        () -> {
+          Authenticate.as(null).withPassword("frapper").at(securityEndpoint);
+        });
+  }
 
-    @Test
-    public void ensureLoggingInAsExistingUserProducesToken() {
-        withPrincipals(TestRoles.administrator1())
-                .perform(
-                        () -> {
-                            AuthenticationElement result =
-                                    Authenticate.as("administrator1").withPassword("frapadap1").at(securityEndpoint);
-                            assertThat(result, is(not(nullValue())));
-                            assertThat(result.getToken(), is(not(nullValue())));
-                            securityEndpoint.validate(result.getToken());
-                        });
-    }
+  @Test
+  public void ensureLoggingInAsExistingUserProducesToken() {
+    withPrincipals(TestRoles.administrator1())
+        .perform(
+            () -> {
+              AuthenticationElement result =
+                  Authenticate.as("administrator1").withPassword("frapadap1").at(securityEndpoint);
+              assertThat(result, is(not(nullValue())));
+              assertThat(result.getToken(), is(not(nullValue())));
+              securityEndpoint.validate(result.getToken());
+            });
+  }
 
-    @Test
-    public void ensureAuthenticatingViaTokenProducesPrincipalWithCorrectRoles() {
-        withPrincipals(TestRoles.administrator1())
-                .perform(
-                        () -> {
-                            AuthenticationElement result =
-                                    Authenticate.as("administrator1").withPassword("frapadap1").at(securityEndpoint);
+  @Test
+  public void ensureAuthenticatingViaTokenProducesPrincipalWithCorrectRoles() {
+    withPrincipals(TestRoles.administrator1())
+        .perform(
+            () -> {
+              AuthenticationElement result =
+                  Authenticate.as("administrator1").withPassword("frapadap1").at(securityEndpoint);
 
-                            final PrincipalElement principalElement = result.getPrincipal();
+              final PrincipalElement principalElement = result.getPrincipal();
 
-                            assertThat(principalElement, is(not(nullValue())));
-                            assertThat(principalElement.getUsername(), is("administrator1"));
-                            assertThat(principalElement.getRoles().size(), is(3));
-                            Set<String> roleNames =
-                                    principalElement
-                                            .getRoles()
-                                            .stream()
-                                            .map(RoleElement::getAuthority)
-                                            .collect(Collectors.toSet());
-                            assertThat(roleNames, is(new HashSet<>(Arrays.asList("admin", "tenant:user", "tenant:admin"))));
-                        });
-    }
-
+              assertThat(principalElement, is(not(nullValue())));
+              assertThat(principalElement.getUsername(), is("administrator1"));
+              assertThat(principalElement.getRoles().size(), is(3));
+              Set<String> roleNames =
+                  principalElement
+                      .getRoles()
+                      .stream()
+                      .map(RoleElement::getAuthority)
+                      .collect(Collectors.toSet());
+              assertThat(
+                  roleNames,
+                  is(new HashSet<>(Arrays.asList("admin", "tenant:user", "tenant:admin"))));
+            });
+  }
 }

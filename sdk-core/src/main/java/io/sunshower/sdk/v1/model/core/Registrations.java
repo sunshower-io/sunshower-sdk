@@ -13,6 +13,7 @@ import org.mapstruct.*;
 )
 public interface Registrations {
   @Mappings({
+    @Mapping(target = "id", ignore = true),
     @Mapping(source = "username", target = "username"),
     @Mapping(source = "emailAddress", target = "details.emailAddress")
   })

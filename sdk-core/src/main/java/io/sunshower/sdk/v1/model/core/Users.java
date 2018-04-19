@@ -23,8 +23,9 @@ public interface Users {
 
   @InheritInverseConfiguration
   @Mappings({
+    @Mapping(target = "id", ignore = true),
+    @Mapping(target = "roles", ignore = true),
     @Mapping(target = "password", source = "password"),
-    @Mapping(target = "roles", ignore = true)
   })
   User toModel(PrincipalElement principalElement);
 }

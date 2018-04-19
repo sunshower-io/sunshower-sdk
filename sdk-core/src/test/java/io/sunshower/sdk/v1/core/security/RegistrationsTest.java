@@ -51,6 +51,11 @@ class RegistrationsTest {
   }
 
   @Test
+  void ensureUserIdIsSet() {
+
+  }
+
+  @Test
   public void ensureRegistrationTransformationToRequestWorks() {
     RegistrationRequest request = new RegistrationRequest();
     request.setUser(user);
@@ -93,6 +98,7 @@ class RegistrationsTest {
     assertThat(user.getDetails(), is(not(nullValue())));
     assertThat(user.getDetails().getEmailAddress(), is("slide"));
     assertThat(user.getDetails().getUser(), is(user));
+    assertThat(user.getId(), is(not(nullValue())));
   }
 
   @Test

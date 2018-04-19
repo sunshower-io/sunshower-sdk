@@ -58,7 +58,7 @@ public class DefaultUserEndpointTest extends SdkTest {
               .lastName("dab")
               .username("wabbab")
               .phoneNumber("970-888-8888")
-              .emailAddress("coolbean")
+              .emailAddress("coolbeanszzes")
               .password("coolbeans")
               .create();
       signupEndpoint.signup(registrationRequestElement);
