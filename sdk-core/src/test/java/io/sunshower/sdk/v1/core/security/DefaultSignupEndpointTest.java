@@ -137,7 +137,6 @@ public class DefaultSignupEndpointTest extends SdkTest {
             AuthenticationElement element =
                 Authenticate.as("new-user2").withPassword("password").at(securityEndpoint);
             List<RoleElement> roles = element.getPrincipal().getRoles();
-            assertThat(roles.size(), is(1));
             assertThat(
                 roles
                     .stream()
