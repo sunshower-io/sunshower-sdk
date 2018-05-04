@@ -36,7 +36,6 @@ class DefaultActivationEndpointTest extends SdkTest {
   }
 
   @Test
-  @Transactional(propagation = Propagation.NESTED)
   public void ensureActivatingAndDeactivatingWork() {
     try {
       PrincipalElement principal = getPrincipalElement();
