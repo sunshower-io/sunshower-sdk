@@ -7,6 +7,7 @@ import io.sunshower.sdk.channel.MediaTypeInterceptor;
 import io.sunshower.sdk.channel.ReactiveChannelSelector;
 import io.sunshower.sdk.common.jaxb.CachingJAXBContextAwareMOxyJSONProvider;
 import io.sunshower.service.model.io.FileResolutionStrategy;
+import io.sunshower.test.common.TestClasspath;
 import io.sunshower.test.common.TestConfigurations;
 import io.sunshower.test.persist.ConnectionDetectingJDBCTemplate;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
@@ -71,7 +72,11 @@ public class SdkTestConfiguration {
   @Primary
   @Bean(name = TestConfigurations.TEST_CONFIGURATION_REPOSITORY_PATH)
   public String location() {
-    return "/sdk-core/src/test/resources";
+    return TestClasspath.rootDir()
+            .getParent()
+            .resolve("sdk-core/src/test/resources")
+            .toFile()
+            .getAbsolutePath();
   }
 
   @Bean
