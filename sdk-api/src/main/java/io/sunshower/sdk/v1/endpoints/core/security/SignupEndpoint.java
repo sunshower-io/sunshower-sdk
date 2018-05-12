@@ -40,6 +40,6 @@ public interface SignupEndpoint {
   @Path("{id}")
   RegistrationRequestElement delete(@PathParam("id") String id);
 
-  @PUT
+  @POST
   RegistrationConfirmationElement signup(RegistrationRequestElement request);
 }
