@@ -2,7 +2,6 @@ package io.sunshower.sdk.test;
 
 import io.sunshower.sdk.channel.Message;
 import io.sunshower.sdk.lang.IdentifierElement;
-import io.sunshower.sdk.v1.core.auth.model.UsernamePasswordCredentialElement;
 import io.sunshower.test.ws.Remote;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.junit.jupiter.api.Test;
@@ -16,11 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -49,8 +44,7 @@ class ChannelEndpointTest extends SdkTest {
   }
 
   @Test
-  void ensureMessagesWorkCorrectly()
-      throws InterruptedException, TimeoutException, ExecutionException {
+  void ensureMessagesWorkCorrectly() {
     final ResteasyWebTarget target = (ResteasyWebTarget) webTarget;
     IdentifierElement ticker =
         target

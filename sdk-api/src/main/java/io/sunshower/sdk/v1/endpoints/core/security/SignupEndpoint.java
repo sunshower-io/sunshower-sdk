@@ -8,6 +8,7 @@ import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("signup")
@@ -20,6 +21,7 @@ import java.util.List;
   MediaType.APPLICATION_XML,
 })
 public interface SignupEndpoint {
+
 
   @GET
   @Path("/approved")
@@ -42,4 +44,8 @@ public interface SignupEndpoint {
 
   @POST
   RegistrationConfirmationElement signup(RegistrationRequestElement request);
+
+
+  @OPTIONS
+  Response getOptions();
 }

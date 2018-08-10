@@ -3,8 +3,14 @@ package io.sunshower.sdk.v1.model.core;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
+import io.sunshower.service.signup.Product;
 import io.sunshower.service.signup.RegistrationRequest;
 import org.mapstruct.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Mapper(
   componentModel = "jsr330",
@@ -12,6 +18,15 @@ import org.mapstruct.*;
   uses = {Roles.class, Users.class}
 )
 public interface Registrations {
+
+  @Mappings({})
+  default List<String> productToNames(Set<Product> products) {
+    if (products == null) {
+      return Collections.emptyList();
+    }
+    return products.stream().map(Product::getName).collect(Collectors.toList());
+  }
+
   @Mappings({
     @Mapping(target = "id", ignore = true),
     @Mapping(source = "username", target = "username"),
@@ -32,6 +47,7 @@ public interface Registrations {
   RegistrationRequestElement toElement(RegistrationRequest registrationRequest);
 
   @InheritInverseConfiguration
+  @Mappings({@Mapping(target = "products", ignore = true)})
   RegistrationRequest toModel(RegistrationRequestElement registrationRequestElement);
 
   @Mappings({

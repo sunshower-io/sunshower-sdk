@@ -19,6 +19,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import javax.ws.rs.core.Response;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -33,14 +35,29 @@ public class DefaultSignupEndpoint implements SignupEndpoint {
 
   @Override
   public RegistrationConfirmationElement signup(RegistrationRequestElement request) {
+    List<String> productIds =
+        request.getProducts() == null ? Collections.emptyList() : request.getProducts();
     try {
       final User user = registrations.toUser(request);
-      final RegistrationRequest signup = signupService.signup(user);
-
-      return registrations.toConfirmation(signup);
+      final RegistrationRequest signup = signupService.signup(user, productIds);
+      final RegistrationConfirmationElement registrationConfirmationElement =
+          registrations.toConfirmation(signup);
+      signup.getProducts();
+      return registrationConfirmationElement;
     } catch (PersistenceException ex) {
       throw new DuplicateElementException("username and e-mail address must be unique");
     }
+  }
+
+  @Override
+  public Response getOptions() {
+    return Response.status(Response.Status.OK)
+        .allow("POST")
+        .header("Access-Control-Allow-Origin", "*")
+        .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        .header("Access-Control-Max-Age", 1000)
+        .header("Access-Control-Allow-Headers", "origin, x-csrftoken, content-type, accept")
+        .build();
   }
 
   @Override
