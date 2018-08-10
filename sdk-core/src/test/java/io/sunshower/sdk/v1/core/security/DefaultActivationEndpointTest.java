@@ -10,11 +10,9 @@ import io.sunshower.sdk.v1.model.core.security.AuthenticationRequest;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.PermissionsService;
 import io.sunshower.test.ws.Remote;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.jdbc.Sql;
 
 import javax.inject.Inject;
 
@@ -22,6 +20,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+//@Sql(
+//        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+//        scripts = "classpath:/sql/drop-roles.sql"
+//)
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class DefaultActivationEndpointTest extends SdkTest {
 
   @Inject private PermissionsService permissionsService;
@@ -36,7 +39,6 @@ class DefaultActivationEndpointTest extends SdkTest {
   }
 
   @Test
-  @Transactional(propagation = Propagation.NESTED)
   public void ensureActivatingAndDeactivatingWork() {
     try {
       PrincipalElement principal = getPrincipalElement();

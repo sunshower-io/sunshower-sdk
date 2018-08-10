@@ -12,6 +12,7 @@ import io.sunshower.sdk.core.model.ActivationElement;
 import io.sunshower.sdk.v1.SdkConfiguration;
 import io.sunshower.sdk.v1.model.core.element.PersistentElement;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
+import io.sunshower.security.api.SecurityPersistenceConfiguration;
 import io.sunshower.service.CoreServiceConfiguration;
 import io.sunshower.service.security.Action;
 import io.sunshower.service.security.SecurityConfiguration;
@@ -66,6 +67,7 @@ import java.util.concurrent.ConcurrentHashMap;
 )
 @ContextConfiguration(classes = {
         TestConfigurationConfiguration.class,
+        SecurityPersistenceConfiguration.class,
         SdkConfiguration.class,
         CoreServiceConfiguration.class,
         SecurityConfiguration.class,

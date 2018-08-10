@@ -6,4 +6,4 @@ RUN mkdir -p /home/sunshower/$PROJECT_NAME
 COPY . /home/sunshower/$PROJECT_NAME
 WORKDIR /home/sunshower/$PROJECT_NAME
 RUN chmod +x ./scripts/build.sh 
-ENTRYPOINT ./scripts/build.sh  $BRANCH_SPEC
+ENTRYPOINT ./scripts/build.sh  $BRANCH_SPEC 

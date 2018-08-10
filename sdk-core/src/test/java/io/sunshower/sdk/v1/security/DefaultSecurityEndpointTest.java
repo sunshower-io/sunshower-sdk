@@ -17,13 +17,9 @@ import org.springframework.test.context.jdbc.Sql;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.NotSupportedException;
-import javax.transaction.SystemException;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
   executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
   scripts = "classpath:/sql/drop-roles.sql"
 )
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class DefaultSecurityEndpointTest extends SdkTest {
 
   @PersistenceContext private EntityManager entityManager;
