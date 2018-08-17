@@ -2,6 +2,7 @@ package io.sunshower.sdk.v1.model.core.element;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.common.rs.IdentifierConverter;
+import io.sunshower.common.rs.LaxIdentifierConverter;
 import io.sunshower.common.rs.TypeAttributeClassExtractor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class AbstractElement<E extends PersistentElement<Identifier, E>> extends
     @Setter
     @XmlIDExtension
     @XmlAttribute(name = "id")
-    @XmlJavaTypeAdapter(IdentifierConverter.class)
+    @XmlJavaTypeAdapter(LaxIdentifierConverter.class)
     private Identifier id;
     
     public AbstractElement() {
