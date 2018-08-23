@@ -29,8 +29,8 @@ class DefaultActivationEndpointTest extends SdkTest {
 
   @Inject private PermissionsService permissionsService;
 
-  @Remote private SecurityEndpoint securityEndpoint;
-  @Remote private ActivationEndpoint activationEndpoint;
+  @Inject private SecurityEndpoint securityEndpoint;
+  @Inject private ActivationEndpoint activationEndpoint;
 
   @Test
   public void ensureApplicationIsInitiallyInactive() {
