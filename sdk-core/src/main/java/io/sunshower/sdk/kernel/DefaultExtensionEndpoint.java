@@ -11,47 +11,42 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DefaultExtensionEndpoint implements ExtensionEndpoint {
 
-    @Inject
-    private Extensions extensions;
-    
-    @Inject
-    private PluginManager pluginManager; 
-    
-    
-    @Override
-    @PreAuthorize("hasAuthority('admin')")
-    public List<ExtensionPointDescriptorElement> list() {
-        return pluginManager
-                .getExtensionPoints()
-                .stream()
-                .map(extensions::toElement)
-                .collect(Collectors.toList());
-        
-    }
+  @Inject private Extensions extensions;
 
-    @Override
-    @PreAuthorize("hasAuthority('admin')")
-    public ExtensionPointDescriptorElement get(Identifier id) {
-        return list().get(0);
-    }
+  //    @Inject
+  //    private PluginManager pluginManager;
 
-    @Override
-    public void deploy(HttpServletRequest req, HttpServletResponse res) throws PluginUploadFault {
+  @Override
+  @PreAuthorize("hasAuthority('admin')")
+  public List<ExtensionPointDescriptorElement> list() {
+    //        return pluginManager
+    //                .getExtensionPoints()
+    //                .stream()
+    //                .map(extensions::toElement)
+    //                .collect(Collectors.toList());
+    return Collections.emptyList();
+  }
 
-    }
+  @Override
+  @PreAuthorize("hasAuthority('admin')")
+  public ExtensionPointDescriptorElement get(Identifier id) {
+    return list().get(0);
+  }
 
-    @Override
-    public void setState(String pluginId, PluginState state) {
+  @Override
+  public void deploy(HttpServletRequest req, HttpServletResponse res) throws PluginUploadFault {}
 
-    }
+  @Override
+  public void setState(String pluginId, PluginState state) {}
 
-    @Override
-    public PluginState getState(String id) {
-        return null;
-    }
+  @Override
+  public PluginState getState(String id) {
+    return null;
+  }
 }

@@ -5,15 +5,12 @@ import io.sunshower.persistence.Dialect;
 import io.sunshower.sdk.channel.ChannelSelector;
 import io.sunshower.sdk.channel.MediaTypeInterceptor;
 import io.sunshower.sdk.channel.ReactiveChannelSelector;
-import io.sunshower.sdk.common.jaxb.CachingJAXBContextAwareMOxyJSONProvider;
 import io.sunshower.service.model.io.FileResolutionStrategy;
 import io.sunshower.test.common.TestClasspath;
 import io.sunshower.test.common.TestConfigurations;
 import io.sunshower.test.persist.ConnectionDetectingJDBCTemplate;
-import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.jboss.resteasy.plugins.providers.sse.SseEventProvider;
 import org.jboss.resteasy.plugins.providers.sse.SseEventSinkInterceptor;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -22,6 +19,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+
+import static org.mockito.Mockito.mock;
 
 @Configuration
 public class SdkTestConfiguration {
@@ -66,7 +65,7 @@ public class SdkTestConfiguration {
 
   @Bean
   public PluginManager pluginManager() {
-    return new MockPluginManager();
+    return mock(PluginManager.class);
   }
 
   @Primary

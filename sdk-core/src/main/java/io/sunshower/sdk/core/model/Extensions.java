@@ -13,8 +13,6 @@ public interface Extensions {
     }
     final ExtensionPointDescriptorElement ele = new ExtensionPointDescriptorElement();
     ele.setCoordinates(toElement(e.getCoordinate()));
-    ele.setExtensionType(e.getExtensionPoint());
-    ele.setLocation(e.getMetadata().getDeploymentLocation());
     return ele;
   }
 
