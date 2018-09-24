@@ -81,7 +81,7 @@ pipeline {
                 sh "find . -name gradle.properties | xargs sed -i  's/^version=${env.CURRENT_VERSION}\$/version=${env.NEXT_VERSION}/g'"
 
                 sh """
-                    gradle clean build publish sA -i \
+                    gradle clean build publish sA -i --stacktrace \
                     -PmavenRepositoryUrl=http://artifacts.sunshower.io/repository/sunshower-releases \
                     -PmavenRepositoryUsername=${MVN_REPO_USR} \
                     -PmavenRepositoryPassword=${MVN_REPO_PSW} \
