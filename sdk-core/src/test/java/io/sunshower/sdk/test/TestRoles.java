@@ -6,15 +6,16 @@ public class TestRoles {
 
   public static PrincipalElement administrator1() {
     return PrincipalElement.create()
-            .active(true)
-            .username("administrator1")
-            .emailAddress("josiah1@gmail.com")
-            .firstName("josiah1")
-            .lastName("haswel1l")
-            .phoneNumber("999-999-99991")
-            .password("frapadap1")
-            .newPrincipal();
+        .active(true)
+        .username("administrator1")
+        .emailAddress("josiah1@gmail.com")
+        .firstName("josiah1")
+        .lastName("haswel1l")
+        .phoneNumber("999-999-99991")
+        .password("frapadap1")
+        .newPrincipal();
   }
+
   public static PrincipalElement administrator() {
     return PrincipalElement.create()
         .active(true)
@@ -26,5 +27,4 @@ public class TestRoles {
         .password("frapadap")
         .newPrincipal();
   }
-  
 }

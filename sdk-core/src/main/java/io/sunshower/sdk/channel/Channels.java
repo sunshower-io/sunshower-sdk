@@ -1,13 +1,11 @@
 package io.sunshower.sdk.channel;
 
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
+import java.util.Map;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.Sse;
 import javax.ws.rs.sse.SseEventSink;
-import java.util.Map;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.reactivestreams.Subscriber;
 
 public class Channels {
 

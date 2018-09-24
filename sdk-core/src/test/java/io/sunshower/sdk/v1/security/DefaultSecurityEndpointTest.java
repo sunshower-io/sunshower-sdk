@@ -1,31 +1,28 @@
 package io.sunshower.sdk.v1.security;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import io.sunshower.core.security.crypto.EncryptionService;
-import io.sunshower.model.core.auth.Role;
-import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.test.SdkTest;
 import io.sunshower.sdk.test.TestRoles;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.model.core.security.*;
 import io.sunshower.test.ws.Remote;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.jdbc.Sql;
-
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
 
 @Sql(
   executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
@@ -101,17 +98,18 @@ public class DefaultSecurityEndpointTest extends SdkTest {
 
               assertThat(principalElement, is(not(nullValue())));
               assertThat(principalElement.getUsername(), is("administrator1"));
-              //TODO: FIGURE OUT
-//              assertThat(principalElement.getRoles().size(), is(3));
+              // TODO: FIGURE OUT
+              //              assertThat(principalElement.getRoles().size(), is(3));
               Set<String> roleNames =
                   principalElement
                       .getRoles()
                       .stream()
                       .map(RoleElement::getAuthority)
                       .collect(Collectors.toSet());
-//              assertThat(
-//                  roleNames,
-//                  is(new HashSet<>(Arrays.asList("admin", "tenant:user", "tenant:admin"))));
+              //              assertThat(
+              //                  roleNames,
+              //                  is(new HashSet<>(Arrays.asList("admin", "tenant:user",
+              // "tenant:admin"))));
             });
   }
 }

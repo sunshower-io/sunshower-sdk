@@ -1,13 +1,11 @@
 package io.sunshower.sdk.v1.model.core.security;
 
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
-import lombok.*;
-
+import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter
@@ -38,8 +36,7 @@ public class RegistrationRequestElement extends AbstractElement<RegistrationRequ
   @XmlElement(name = "last-name")
   private String lastName;
 
-  @XmlElement
-  private List<String> products;
+  @XmlElement private List<String> products;
 
   {
     setType(RegistrationRequestElement.class);

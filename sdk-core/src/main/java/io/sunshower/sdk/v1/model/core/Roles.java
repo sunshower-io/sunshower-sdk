@@ -2,10 +2,9 @@ package io.sunshower.sdk.v1.model.core;
 
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.sdk.v1.model.core.security.RoleElement;
-import org.mapstruct.*;
-
 import java.util.List;
 import java.util.Set;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "jsr330", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface Roles {

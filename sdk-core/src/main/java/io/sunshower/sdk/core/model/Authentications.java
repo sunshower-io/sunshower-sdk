@@ -6,9 +6,8 @@ import io.sunshower.sdk.v1.model.core.Roles;
 import io.sunshower.sdk.v1.model.core.Users;
 import io.sunshower.sdk.v1.model.core.security.AuthenticationElement;
 import io.sunshower.sdk.v1.model.core.security.RoleElement;
-import org.mapstruct.*;
-
 import java.util.*;
+import org.mapstruct.*;
 
 @Mapper(
   componentModel = "jsr330",

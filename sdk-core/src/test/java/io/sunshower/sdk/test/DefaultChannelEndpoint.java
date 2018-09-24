@@ -4,7 +4,6 @@ import io.sunshower.common.Identifier;
 import io.sunshower.sdk.channel.ChannelSelector;
 import io.sunshower.sdk.channel.CurrentContextSubscriber;
 import io.sunshower.sdk.lang.IdentifierElement;
-
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.Sse;
@@ -31,7 +30,6 @@ public class DefaultChannelEndpoint implements ChannelEndpoint {
     final Identifier id = Identifier.random();
     channelSelector.create(id, new MessageTicker());
     return IdentifierElement.from(id);
-
   }
 
   @Override

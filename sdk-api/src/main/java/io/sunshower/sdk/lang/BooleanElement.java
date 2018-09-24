@@ -1,7 +1,6 @@
 package io.sunshower.sdk.lang;
 
 import io.sunshower.sdk.v1.model.core.element.Value;
-
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 

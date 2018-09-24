@@ -1,15 +1,13 @@
 package io.sunshower.sdk.channel;
 
-import lombok.Synchronized;
-import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import lombok.Synchronized;
+import org.reactivestreams.Publisher;
 
 public class ReactiveChannelSelector implements ChannelSelector {
 
@@ -30,7 +28,7 @@ public class ReactiveChannelSelector implements ChannelSelector {
   public <I, T> void create(I id, Channel<T> publisher) {
     if (!channels.containsKey(id)) {
       final Channel<T> channel;
-      if(publisher instanceof ManagedChannel) {
+      if (publisher instanceof ManagedChannel) {
         channel = publisher;
       } else {
         channel = new ManagedChannel<>(this, id, publisher);

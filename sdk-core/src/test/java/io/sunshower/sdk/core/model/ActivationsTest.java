@@ -1,23 +1,22 @@
 package io.sunshower.sdk.core.model;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+
 import io.sunshower.common.Identifier;
 import io.sunshower.model.core.auth.Activation;
 import io.sunshower.sdk.v1.MappingConfiguration;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
+import java.util.Date;
+import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import javax.inject.Inject;
-import java.util.Date;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)

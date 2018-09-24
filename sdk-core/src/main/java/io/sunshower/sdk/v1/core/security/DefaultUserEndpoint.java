@@ -8,15 +8,14 @@ import io.sunshower.sdk.lang.BooleanElement;
 import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
 import io.sunshower.sdk.v1.model.core.Users;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 
 public class DefaultUserEndpoint implements UserEndpoint {
 
@@ -28,16 +27,16 @@ public class DefaultUserEndpoint implements UserEndpoint {
   @Transactional
   @PreAuthorize("hasAuthority('admin')")
   public BooleanElement delete(Identifier userid) {
-      User user = entityManager.find(User.class, userid);
-      if(user == null) {
-          return BooleanElement.False;
-      } 
-      final List<Role> roles = new ArrayList<>(user.getRoles());
-      for(Role role : roles) {
-          user.removeRole(role);
-      }
-      entityManager.remove(user);
-      return BooleanElement.True;
+    User user = entityManager.find(User.class, userid);
+    if (user == null) {
+      return BooleanElement.False;
+    }
+    final List<Role> roles = new ArrayList<>(user.getRoles());
+    for (Role role : roles) {
+      user.removeRole(role);
+    }
+    entityManager.remove(user);
+    return BooleanElement.True;
   }
 
   @Override

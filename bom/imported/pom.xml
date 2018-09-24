@@ -17,8 +17,8 @@
 
 
   <properties>
-    <sunshower-base.version>1.0.0-SNAPSHOT</sunshower-base.version>
-    <sunshower-core.version>1.0.0-SNAPSHOT</sunshower-core.version>
+    <sunshower-base.version>1.0.1.Final</sunshower-base.version>
+    <sunshower-core.version>1.0.1.Final</sunshower-core.version>
     <sunshower-kernel.version>1.0.0-SNAPSHOT</sunshower-kernel.version>
   </properties>
 

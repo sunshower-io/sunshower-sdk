@@ -1,7 +1,6 @@
 package io.sunshower.sdk.v1.core.security;
 
 import io.sunshower.core.security.AuthenticationService;
-import io.sunshower.core.security.InvalidCredentialException;
 import io.sunshower.model.core.auth.Authentication;
 import io.sunshower.model.core.auth.Token;
 import io.sunshower.model.core.auth.User;
@@ -11,9 +10,8 @@ import io.sunshower.sdk.v1.model.core.faults.authorization.AuthenticationFailedE
 import io.sunshower.sdk.v1.model.core.security.AuthenticationElement;
 import io.sunshower.sdk.v1.model.core.security.AuthenticationRequest;
 import io.sunshower.sdk.v1.model.core.security.AuthenticationTokenElement;
-
-import javax.inject.Inject;
 import java.util.Date;
+import javax.inject.Inject;
 
 public class DefaultSecurityEndpoint implements SecurityEndpoint {
 

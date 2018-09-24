@@ -2,14 +2,13 @@ package io.sunshower.sdk.core.model;
 
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter

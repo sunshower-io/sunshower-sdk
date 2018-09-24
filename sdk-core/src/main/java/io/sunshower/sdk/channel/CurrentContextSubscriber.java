@@ -1,12 +1,11 @@
 package io.sunshower.sdk.channel;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.OutboundSseEvent;
 import javax.ws.rs.sse.Sse;
 import javax.ws.rs.sse.SseEventSink;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 public class CurrentContextSubscriber<T> implements Subscriber<T> {
   private final Sse sse;

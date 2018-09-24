@@ -1,9 +1,8 @@
 package io.sunshower.sdk.channel;
 
+import java.util.concurrent.Future;
 import lombok.Synchronized;
 import org.reactivestreams.Subscriber;
-
-import java.util.concurrent.Future;
 
 public class ManagedChannel<I, T> implements Channel<T>, Runnable {
 
@@ -65,6 +64,5 @@ public class ManagedChannel<I, T> implements Channel<T>, Runnable {
   public void setFuture(Future<T> future) {
     status = Status.Starting;
     this.future = future;
-
   }
 }

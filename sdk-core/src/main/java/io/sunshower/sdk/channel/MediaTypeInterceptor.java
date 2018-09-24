@@ -1,12 +1,11 @@
 package io.sunshower.sdk.channel;
 
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
-
+import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
 @Provider
 public class MediaTypeInterceptor implements ContainerRequestFilter {

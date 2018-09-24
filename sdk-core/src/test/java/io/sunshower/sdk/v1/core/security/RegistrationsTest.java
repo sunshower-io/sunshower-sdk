@@ -1,11 +1,15 @@
 package io.sunshower.sdk.v1.core.security;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.MappingConfiguration;
 import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.signup.RegistrationRequest;
+import javax.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,11 +17,6 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import javax.inject.Inject;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -51,9 +50,7 @@ class RegistrationsTest {
   }
 
   @Test
-  void ensureUserIdIsSet() {
-
-  }
+  void ensureUserIdIsSet() {}
 
   @Test
   public void ensureRegistrationTransformationToRequestWorks() {

@@ -2,7 +2,6 @@ package io.sunshower.sdk.test;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.sdk.lang.IdentifierElement;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -25,7 +24,6 @@ public interface ChannelEndpoint {
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes("*/*")
   String getMediaType(@Context MediaType mediaType);
-
 
   @GET
   @Path("ticker")

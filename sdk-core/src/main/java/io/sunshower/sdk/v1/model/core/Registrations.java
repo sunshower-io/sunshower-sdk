@@ -5,12 +5,11 @@ import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.signup.Product;
 import io.sunshower.service.signup.RegistrationRequest;
-import org.mapstruct.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.mapstruct.*;
 
 @Mapper(
   componentModel = "jsr330",

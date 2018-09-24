@@ -1,5 +1,9 @@
 package io.sunshower.sdk.v1.core.security;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.model.ActivationElement;
@@ -9,22 +13,14 @@ import io.sunshower.sdk.v1.model.core.security.Authenticate;
 import io.sunshower.sdk.v1.model.core.security.AuthenticationRequest;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.PermissionsService;
-import io.sunshower.test.ws.Remote;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.jdbc.Sql;
-
 import javax.inject.Inject;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-//@Sql(
+// @Sql(
 //        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
 //        scripts = "classpath:/sql/drop-roles.sql"
-//)
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+// )
+// @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class DefaultActivationEndpointTest extends SdkTest {
 
   @Inject private PermissionsService permissionsService;

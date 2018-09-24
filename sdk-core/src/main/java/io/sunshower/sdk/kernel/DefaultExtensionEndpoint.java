@@ -1,19 +1,16 @@
 package io.sunshower.sdk.kernel;
 
 import io.sunshower.common.Identifier;
-import io.sunshower.kernel.api.PluginManager;
 import io.sunshower.sdk.core.model.Extensions;
 import io.sunshower.sdk.kernel.model.ExtensionPointDescriptorElement;
 import io.sunshower.sdk.kernel.model.PluginState;
 import io.sunshower.sdk.kernel.model.PluginUploadFault;
-import org.springframework.security.access.prepost.PreAuthorize;
-
+import java.util.Collections;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 public class DefaultExtensionEndpoint implements ExtensionEndpoint {
 

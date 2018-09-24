@@ -1,10 +1,9 @@
 package io.sunshower.sdk.kernel.model;
 
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
-import lombok.*;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.*;
 
 @Getter
 @Setter

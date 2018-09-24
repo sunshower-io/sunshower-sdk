@@ -4,6 +4,6 @@ import io.sunshower.service.security.Action;
 
 @FunctionalInterface
 public interface TestAction {
-    
-    void perform(Action action);
+
+  void perform(Action action);
 }

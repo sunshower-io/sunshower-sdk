@@ -1,11 +1,11 @@
 package io.sunshower.sdk.v1.model.core.element;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 class PropertyAwareElementTest extends SerializationTestCase {
 
@@ -13,10 +13,7 @@ class PropertyAwareElementTest extends SerializationTestCase {
     super(
         SerializationAware.Format.JSON,
         new Class<?>[] {
-          String.class,
-          Long.class,
-          PropertyElement.class,
-          TestPropertyAwareElement.class
+          String.class, Long.class, PropertyElement.class, TestPropertyAwareElement.class
         });
   }
 

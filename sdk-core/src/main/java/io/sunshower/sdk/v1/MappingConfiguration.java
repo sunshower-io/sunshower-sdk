@@ -8,7 +8,4 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackageClasses = {Users.class, Activations.class, Authentications.class})
-public class MappingConfiguration {
-    
-    
-}
+public class MappingConfiguration {}

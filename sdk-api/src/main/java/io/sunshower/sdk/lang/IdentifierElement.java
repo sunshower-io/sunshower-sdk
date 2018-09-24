@@ -2,7 +2,6 @@ package io.sunshower.sdk.lang;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.sdk.v1.model.core.element.Value;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "id")

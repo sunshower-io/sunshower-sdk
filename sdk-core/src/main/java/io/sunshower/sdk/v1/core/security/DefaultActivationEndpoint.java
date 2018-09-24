@@ -9,7 +9,6 @@ import io.sunshower.sdk.lang.BooleanElement;
 import io.sunshower.sdk.v1.model.core.Users;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.service.security.ActivationService;
-
 import javax.inject.Inject;
 
 public class DefaultActivationEndpoint implements ActivationEndpoint {

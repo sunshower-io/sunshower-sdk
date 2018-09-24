@@ -9,7 +9,7 @@ class AuthenticationTokenElementTest extends SerializationTestCase {
   public AuthenticationTokenElementTest() {
     super(SerializationAware.Format.JSON, new Class<?>[] {AuthenticationTokenElement.class});
   }
-  
+
   @Test
   public void ensureSerializationIsCorrect() {
     write(new AuthenticationTokenElement("hello"), System.out);

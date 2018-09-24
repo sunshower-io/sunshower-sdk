@@ -1,25 +1,23 @@
 package io.sunshower.sdk.test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import io.sunshower.sdk.channel.Message;
 import io.sunshower.sdk.lang.IdentifierElement;
 import io.sunshower.test.ws.Remote;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.junit.jupiter.api.Test;
-
-import javax.inject.Inject;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.sse.SseEventSource;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import javax.inject.Inject;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.sse.SseEventSource;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.junit.jupiter.api.Test;
 
 class ChannelEndpointTest extends SdkTest {
 

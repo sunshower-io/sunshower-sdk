@@ -1,5 +1,11 @@
 package io.sunshower.sdk.v1.core.security;
 
+import static io.sunshower.sdk.test.TestRoles.administrator;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.core.ActivationEndpoint;
@@ -11,21 +17,14 @@ import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.security.PermissionsService;
 import io.sunshower.test.ws.Remote;
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.Test;
-
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotAuthorizedException;
-import java.util.List;
-
-import static io.sunshower.sdk.test.TestRoles.administrator;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Test;
 
 public class DefaultUserEndpointTest extends SdkTest {
 
@@ -65,7 +64,8 @@ public class DefaultUserEndpointTest extends SdkTest {
       permissionsService.impersonate(
           () -> {
             List<RegistrationRequestElement> list = signupEndpoint.list();
-            assertTrue(signupEndpoint.list().stream().anyMatch(t -> "wabbab".equals(t.getUsername())));
+            assertTrue(
+                signupEndpoint.list().stream().anyMatch(t -> "wabbab".equals(t.getUsername())));
             id = signupEndpoint.approve(list.get(0).getRegistrationId());
           },
           new Role("admin"));

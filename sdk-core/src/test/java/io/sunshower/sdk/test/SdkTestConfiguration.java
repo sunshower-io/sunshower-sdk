@@ -1,5 +1,7 @@
 package io.sunshower.sdk.test;
 
+import static org.mockito.Mockito.mock;
+
 import io.sunshower.kernel.api.PluginManager;
 import io.sunshower.persistence.Dialect;
 import io.sunshower.sdk.channel.ChannelSelector;
@@ -9,18 +11,15 @@ import io.sunshower.service.model.io.FileResolutionStrategy;
 import io.sunshower.test.common.TestClasspath;
 import io.sunshower.test.common.TestConfigurations;
 import io.sunshower.test.persist.ConnectionDetectingJDBCTemplate;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import javax.sql.DataSource;
 import org.jboss.resteasy.plugins.providers.sse.SseEventProvider;
 import org.jboss.resteasy.plugins.providers.sse.SseEventSinkInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.sql.DataSource;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-
-import static org.mockito.Mockito.mock;
 
 @Configuration
 public class SdkTestConfiguration {
@@ -72,10 +71,10 @@ public class SdkTestConfiguration {
   @Bean(name = TestConfigurations.TEST_CONFIGURATION_REPOSITORY_PATH)
   public String location() {
     return TestClasspath.rootDir()
-            .getParent()
-            .resolve("sdk-core/src/test/resources")
-            .toFile()
-            .getAbsolutePath();
+        .getParent()
+        .resolve("sdk-core/src/test/resources")
+        .toFile()
+        .getAbsolutePath();
   }
 
   @Bean

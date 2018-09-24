@@ -1,12 +1,11 @@
 package io.sunshower.sdk.v1.model.core.element;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -22,6 +21,4 @@ public class PropertyAwareElement<E extends PropertyAwareElement<E>> extends Abs
     }
     properties.add(el);
   }
-  
-  
 }

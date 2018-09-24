@@ -1,5 +1,10 @@
 package io.sunshower.sdk.v1.core.security;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.sunshower.model.core.auth.Authentication;
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.model.core.auth.Token;
@@ -8,6 +13,12 @@ import io.sunshower.sdk.core.model.Authentications;
 import io.sunshower.sdk.v1.MappingConfiguration;
 import io.sunshower.sdk.v1.model.core.security.AuthenticationElement;
 import io.sunshower.sdk.v1.model.core.security.RoleElement;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,19 +26,6 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import javax.inject.Inject;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -57,11 +55,10 @@ public class AuthenticationsTest {
 
   @Test
   public void ensureTokenIsCopiedOverFromAuthentication() {
-      authentication.setToken(token);
-      authenticationElement = authentications.toElement(authentication);
-      assertThat(authenticationElement.getToken(), is(not(nullValue())));
-      assertThat(authenticationElement.getToken().getValue(), is("coolbeans"));
-
+    authentication.setToken(token);
+    authenticationElement = authentications.toElement(authentication);
+    assertThat(authenticationElement.getToken(), is(not(nullValue())));
+    assertThat(authenticationElement.getToken().getValue(), is("coolbeans"));
   }
 
   @Test

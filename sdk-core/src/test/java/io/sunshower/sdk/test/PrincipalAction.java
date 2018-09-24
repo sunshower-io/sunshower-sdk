@@ -3,7 +3,6 @@ package io.sunshower.sdk.test;
 import io.sunshower.sdk.core.ActivationEndpoint;
 import io.sunshower.sdk.core.model.ActivationElement;
 import io.sunshower.service.security.Action;
-
 import java.util.HashSet;
 import java.util.Set;
 

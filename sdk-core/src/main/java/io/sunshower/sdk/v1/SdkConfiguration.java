@@ -19,14 +19,13 @@ import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
 import io.sunshower.service.serialization.DynamicJaxrsProviders;
 import io.sunshower.service.serialization.DynamicResolvingMoxyJsonProvider;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 @Configuration
 @Import(MappingConfiguration.class)

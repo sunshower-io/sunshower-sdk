@@ -1,15 +1,14 @@
 package io.sunshower.sdk.v1.model.core.security;
 
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
-import lombok.*;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter
@@ -35,7 +34,7 @@ public class PrincipalElement extends AbstractElement<PrincipalElement> {
 
   @XmlAttribute(name = "phone-number")
   private String phoneNumber;
- 
+
   @XmlAttribute(name = "password")
   private String password;
 

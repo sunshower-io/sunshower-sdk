@@ -13,6 +13,7 @@ allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'project-report'
     apply plugin: 'com.bmuschko.clover'
+    apply plugin: "com.diffplug.gradle.spotless"
     apply plugin: 'io.spring.dependency-management'
 
     clover {
@@ -26,6 +27,11 @@ allprojects {
         }
     }
 
+    spotless {
+        java {
+            googleJavaFormat('1.5')
+        }
+    }
 
     def repos = [
             'http://repo.spring.io/snapshot',
@@ -73,7 +79,7 @@ allprojects {
         imports {
             mavenBom("io.sunshower.sdk:bom-imported:${version}") {
                 bomProperties([
-                        'env.version': '1.0.0-SNAPSHOT'
+                        'env.version': '1.0.8.Final'
                 ])
             }
         }

@@ -1,5 +1,9 @@
 package io.sunshower.sdk.v1.core.security;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import io.sunshower.core.security.InvalidCredentialException;
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.sdk.core.ActivationEndpoint;
@@ -10,18 +14,13 @@ import io.sunshower.sdk.v1.model.core.faults.DuplicateElementException;
 import io.sunshower.sdk.v1.model.core.security.*;
 import io.sunshower.service.security.PermissionsService;
 import io.sunshower.service.signup.SignupService;
-import org.junit.jupiter.api.Test;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-
+import java.util.Arrays;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
 public class DefaultSignupEndpointTest extends SdkTest {
 
@@ -60,7 +59,8 @@ public class DefaultSignupEndpointTest extends SdkTest {
             .password("frapper")
             .firstName("coolbeans")
             .lastName("whatever")
-            .phoneNumber("970-581-1999").products(Arrays.asList("1", "2"))
+            .phoneNumber("970-581-1999")
+            .products(Arrays.asList("1", "2"))
             .create();
 
     write(e, System.out);

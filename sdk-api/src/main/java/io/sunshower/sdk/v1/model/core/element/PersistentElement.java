@@ -1,11 +1,10 @@
 package io.sunshower.sdk.v1.model.core.element;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
-
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.Identifiers;
 import io.sunshower.persist.Sequence;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.Setter;
 

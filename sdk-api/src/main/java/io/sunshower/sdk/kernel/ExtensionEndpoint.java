@@ -4,13 +4,12 @@ import io.sunshower.common.Identifier;
 import io.sunshower.sdk.kernel.model.ExtensionPointDescriptorElement;
 import io.sunshower.sdk.kernel.model.PluginState;
 import io.sunshower.sdk.kernel.model.PluginUploadFault;
-
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path("extensions")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
