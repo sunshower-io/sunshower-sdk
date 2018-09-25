@@ -7,7 +7,6 @@ import io.sunshower.service.model.io.FileResolutionStrategy;
 import java.io.File;
 import java.util.UUID;
 
-/** Created by haswell on 5/24/17. */
 public class MockRepositoryResolutionStrategy implements FileResolutionStrategy {
 
   @Override

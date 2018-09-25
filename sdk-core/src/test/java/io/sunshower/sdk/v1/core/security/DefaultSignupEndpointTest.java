@@ -44,7 +44,7 @@ public class DefaultSignupEndpointTest extends SdkTest {
   @Test
   public void ensureSignupEndpoint() {
     assertThrows(
-        IllegalArgumentException.class,
+        DuplicateElementException.class,
         () -> {
           signupEndpoint.signup(new RegistrationRequestElement());
         });

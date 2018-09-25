@@ -16,23 +16,22 @@ import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.security.PermissionsService;
-import io.sunshower.test.ws.Remote;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.NotAuthorizedException;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
 public class DefaultUserEndpointTest extends SdkTest {
 
   @Inject private PermissionsService<?> permissionsService;
 
-  @Remote private UserEndpoint userEndpoint;
-  @Remote private SignupEndpoint signupEndpoint;
-  @Remote private ActivationEndpoint activationEndpoint;
+  @Inject private UserEndpoint userEndpoint;
+  @Inject private SignupEndpoint signupEndpoint;
+  @Inject private ActivationEndpoint activationEndpoint;
 
   @PersistenceContext private EntityManager entityManager;
 
@@ -79,7 +78,7 @@ public class DefaultUserEndpointTest extends SdkTest {
   @Test
   public void ensureListingActiveUsersWhileUnauthorizedProduces401() {
     assertThrows(
-        NotAuthorizedException.class,
+        AuthenticationCredentialsNotFoundException.class,
         () -> {
           assertThat(userEndpoint.list(true).size(), is(2));
         });
@@ -88,7 +87,7 @@ public class DefaultUserEndpointTest extends SdkTest {
   @Test
   public void ensureListingActiveUsersFailsWithUnauthorizedWhenAuthenticatedAsTenantUser() {
     assertThrows(
-        ForbiddenException.class,
+        AccessDeniedException.class,
         () -> {
           permissionsService.impersonate(
               () -> {
@@ -148,7 +147,7 @@ public class DefaultUserEndpointTest extends SdkTest {
   @Test
   public void ensureListingInactiveUsersWhileUnauthorizedProduces401() {
     assertThrows(
-        NotAuthorizedException.class,
+        AuthenticationCredentialsNotFoundException.class,
         () -> {
           assertThat(userEndpoint.list(false).size(), is(0));
         });
@@ -157,7 +156,7 @@ public class DefaultUserEndpointTest extends SdkTest {
   @Test
   public void ensureListingInactiveUsersFailsWithUnauthorizedWhenAuthenticatedAsTenantUser() {
     assertThrows(
-        ForbiddenException.class,
+        AccessDeniedException.class,
         () -> {
           permissionsService.impersonate(
               () -> {

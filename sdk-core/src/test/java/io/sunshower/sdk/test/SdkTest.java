@@ -21,7 +21,6 @@ import io.sunshower.test.common.TestConfigurationConfiguration;
 import io.sunshower.test.persist.Authority;
 import io.sunshower.test.persist.Principal;
 import io.sunshower.test.ws.EnableJAXRS;
-import io.sunshower.test.ws.Remote;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.inject.Inject;
@@ -29,8 +28,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
@@ -48,7 +45,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Rollback
 @EnableJAXRS
 @ExtendWith(SpringExtension.class)
-@RunWith(JUnitPlatform.class)
 @TestExecutionListeners(
   listeners = {
     ServletTestExecutionListener.class,
@@ -79,7 +75,7 @@ public abstract class SdkTest extends SerializationTestCase {
 
   static final Map<String, String> passwords = new ConcurrentHashMap<>();
 
-  @Remote private ActivationEndpoint activationEndpoint;
+  @Inject private ActivationEndpoint activationEndpoint;
 
   static {
     TestSecurityContextHolder.initialize();

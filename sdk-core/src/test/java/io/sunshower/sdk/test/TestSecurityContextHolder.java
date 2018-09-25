@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.util.Assert;
 
-/** Created by haswell on 5/12/17. */
 public final class TestSecurityContextHolder implements SecurityContextHolderStrategy {
 
   public static void initialize() {

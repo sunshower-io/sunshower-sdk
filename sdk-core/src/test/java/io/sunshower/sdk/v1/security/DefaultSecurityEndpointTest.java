@@ -9,33 +9,29 @@ import io.sunshower.sdk.test.SdkTest;
 import io.sunshower.sdk.test.TestRoles;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
+import io.sunshower.sdk.v1.model.core.faults.authorization.AuthenticationFailedException;
 import io.sunshower.sdk.v1.model.core.security.*;
-import io.sunshower.test.ws.Remote;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 @Sql(
   executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
   scripts = "classpath:/sql/drop-roles.sql"
 )
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class DefaultSecurityEndpointTest extends SdkTest {
+class DefaultSecurityEndpointTest extends SdkTest {
 
   @PersistenceContext private EntityManager entityManager;
 
-  @Remote private SecurityEndpoint securityEndpoint;
+  @Inject private SecurityEndpoint securityEndpoint;
 
-  @Remote private SignupEndpoint endpoint;
+  @Inject private SignupEndpoint endpoint;
 
   @Inject private EncryptionService encryptionService;
 
@@ -48,7 +44,7 @@ public class DefaultSecurityEndpointTest extends SdkTest {
   @Test
   public void ensureSecurityEndpointThrowsCorrectExceptionWhenProvidedNullToken() {
     assertThrows(
-        BadRequestException.class,
+        NullPointerException.class,
         () -> {
           securityEndpoint.authenticate((AuthenticationTokenElement) null);
         });
@@ -58,7 +54,7 @@ public class DefaultSecurityEndpointTest extends SdkTest {
   public void ensureAuthenticateThrows405WhenProvidedNullTokenComponent() {
     AuthenticationTokenElement element = new AuthenticationTokenElement(null);
     assertThrows(
-        NotAuthorizedException.class,
+        AuthenticationFailedException.class,
         () -> {
           securityEndpoint.authenticate(element);
         });
@@ -67,7 +63,7 @@ public class DefaultSecurityEndpointTest extends SdkTest {
   @Test
   public void ensureAuthenticatingWithInvalidUsernameProducesSaneException() {
     assertThrows(
-        NotFoundException.class,
+        NoResultException.class,
         () -> {
           Authenticate.as(null).withPassword("frapper").at(securityEndpoint);
         });

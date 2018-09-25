@@ -41,6 +41,9 @@ allprojects {
     ]
 
 
+    test {
+        useJUnitPlatform()
+    }
 
 
     task sourceJar(type: Jar, dependsOn: classes) {

@@ -6,10 +6,7 @@ import static org.junit.Assert.*;
 import org.eclipse.persistence.oxm.XMLNameTransformer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 
-@RunWith(JUnitPlatform.class)
 public class RenamingStrategyTest {
 
   private XMLNameTransformer transformer;
