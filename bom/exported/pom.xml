@@ -5,18 +5,18 @@
   <parent>
     <groupId>io.sunshower.sdk</groupId>
     <artifactId>bom</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
   <groupId>io.sunshower.sdk</groupId>
   <artifactId>bom-exported</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Sunshower.io Exported Bill-Of-Materials</name>
   <url>http://www.sunshower.io</url>
   <properties>
-    <sunshower-sdk.version>1.0.0-SNAPSHOT</sunshower-sdk.version>
+    <sunshower-sdk.version>1.0.3-SNAPSHOT</sunshower-sdk.version>
   </properties>
 
 
