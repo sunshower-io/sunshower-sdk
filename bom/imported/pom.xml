@@ -18,8 +18,8 @@
 
   <properties>
     <sunshower-base.version>1.0.4.Final</sunshower-base.version>
-    <sunshower-core.version>1.0.4.Final</sunshower-core.version>
-    <sunshower-kernel.version>1.0.2.Final</sunshower-kernel.version>
+    <sunshower-core.version>1.0.5.Final</sunshower-core.version>
+    <sunshower-kernel.version>1.0.4.Final</sunshower-kernel.version>
   </properties>
 
   <dependencyManagement>

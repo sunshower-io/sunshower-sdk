@@ -36,6 +36,8 @@ allprojects {
     def repos = [
             'http://repo.spring.io/snapshot',
             "http://repo.spring.io/libs-milestone",
+            'http://artifacts.sunshower.io/repository/sunshower-snapshots',
+            'http://artifacts.sunshower.io/repository/sunshower-releases',
             "http://oss.sonatype.org/content/repositories/snapshots",
             "http://www.gridgainsystems.com/nexus/content/repositories/external"
     ]
