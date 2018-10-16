@@ -3,12 +3,15 @@ package io.sunshower.sdk.v1.model.core;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
+import io.sunshower.sdk.v1.model.ext.ImageElement;
 import io.sunshower.service.signup.Product;
 import io.sunshower.service.signup.RegistrationRequest;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lombok.val;
 import org.mapstruct.*;
 
 @Mapper(
@@ -17,6 +20,7 @@ import org.mapstruct.*;
   uses = {Roles.class, Users.class}
 )
 public interface Registrations {
+  Base64.Encoder encoder = Base64.getEncoder();
 
   @Mappings({})
   default List<String> productToNames(Set<Product> products) {
@@ -42,8 +46,33 @@ public interface Registrations {
     @Mapping(source = "user.username", target = "username"),
     @Mapping(source = "user.details.emailAddress", target = "emailAddress"),
     @Mapping(source = "requestId", target = "registrationId"),
+    @Mapping(target = "type", ignore = true),
+    @Mapping(target = "image", expression = "java(imageElement(registrationRequest.getUser()))")
   })
   RegistrationRequestElement toElement(RegistrationRequest registrationRequest);
+
+  default ImageElement imageElement(User user) {
+    if (user == null) {
+      return null;
+    }
+    val details = user.getDetails();
+    if (details == null) {
+      return null;
+    }
+    val image = details.getImage();
+    if (image == null) {
+      return null;
+    }
+    final ImageElement result = new ImageElement();
+    if (image.getType() != null) {
+      result.setFormat(image.getType().name());
+    }
+
+    if (image.getData() != null) {
+      result.setData(encoder.encodeToString(image.getData()));
+    }
+    return result;
+  }
 
   @InheritInverseConfiguration
   @Mappings({@Mapping(target = "products", ignore = true)})

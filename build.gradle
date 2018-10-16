@@ -1,7 +1,7 @@
 buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
     dependencies {
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.13"
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.18"
     }
 }
 apply plugin: 'nebula-aggregate-javadocs'
@@ -93,8 +93,9 @@ allprojects {
     plugins.withType(JavaPlugin) {
 
         dependencies {
-            apt "org.projectlombok:lombok:1.16.20"
-            compileOnly "org.projectlombok:lombok:1.16.20"
+            annotationProcessor "org.projectlombok:lombok:1.18.2"
+            compileOnly "org.projectlombok:lombok:1.18.2"
+            testCompileOnly "org.projectlombok:lombok:1.18.2"
             compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
             compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
             testCompile 'javax.mail:mail'

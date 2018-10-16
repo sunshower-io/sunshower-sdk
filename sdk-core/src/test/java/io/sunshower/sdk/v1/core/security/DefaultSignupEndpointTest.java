@@ -42,12 +42,10 @@ public class DefaultSignupEndpointTest extends SdkTest {
   }
 
   @Test
-  public void ensureSignupEndpoint() {
+  public void ensureSignupEndpointFailsForInvalidUser() {
     assertThrows(
-        DuplicateElementException.class,
-        () -> {
-          signupEndpoint.signup(new RegistrationRequestElement());
-        });
+        IllegalArgumentException.class,
+        () -> signupEndpoint.signup(new RegistrationRequestElement()));
   }
 
   @Test
@@ -72,6 +70,27 @@ public class DefaultSignupEndpointTest extends SdkTest {
         () -> {
           signupEndpoint.list().size();
         });
+  }
+
+  @Test
+  void ensureValidUserHasCorrectIcon() {
+    RegistrationRequestElement e =
+        RegistrationRequestElement.newRegistration()
+            .username("josiah")
+            .emailAddress("joe@sunshower.io")
+            .password("frapper")
+            .firstName("coolbeans")
+            .lastName("whatever")
+            .phoneNumber("970-581-1999")
+            .products(Arrays.asList("1", "2"))
+            .create();
+    final RegistrationConfirmationElement signup = signupEndpoint.signup(e);
+    permissionsService.impersonate(
+        () -> {
+          final List<RegistrationRequestElement> list = signupEndpoint.list();
+          assertTrue(list.stream().allMatch(t -> t.getImage() != null));
+        },
+        new Role("admin"));
   }
 
   @Test

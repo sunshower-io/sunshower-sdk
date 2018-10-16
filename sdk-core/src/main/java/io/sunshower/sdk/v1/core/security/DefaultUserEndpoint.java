@@ -24,6 +24,9 @@ public class DefaultUserEndpoint implements UserEndpoint {
   @PersistenceContext private EntityManager entityManager;
 
   @Override
+  public void update(Identifier userId, PrincipalElement element) {}
+
+  @Override
   @Transactional
   @PreAuthorize("hasAuthority('admin')")
   public BooleanElement delete(Identifier userid) {

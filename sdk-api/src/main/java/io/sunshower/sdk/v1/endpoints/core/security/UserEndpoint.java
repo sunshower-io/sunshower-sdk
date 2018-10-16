@@ -12,6 +12,10 @@ import javax.ws.rs.core.MediaType;
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface UserEndpoint {
 
+  @PUT
+  @Path("{id}/details")
+  void update(@PathParam("id") Identifier userId, PrincipalElement element);
+
   @DELETE
   @Path("/{id}")
   BooleanElement delete(@PathParam("id") Identifier userid);
