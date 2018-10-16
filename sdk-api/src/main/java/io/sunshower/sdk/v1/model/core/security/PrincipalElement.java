@@ -1,6 +1,7 @@
 package io.sunshower.sdk.v1.model.core.security;
 
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
+import io.sunshower.sdk.v1.model.ext.ImageElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +48,8 @@ public class PrincipalElement extends AbstractElement<PrincipalElement> {
   @XmlAttribute private Date registered;
 
   @XmlAttribute private Date lastActive;
+
+  @XmlElement private ImageElement imageElement;
 
   {
     setType(PrincipalElement.class);

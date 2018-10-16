@@ -1,5 +1,6 @@
 package io.sunshower.sdk.v1.model.core;
 
+import io.sunshower.model.core.Image;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
@@ -63,15 +64,7 @@ public interface Registrations {
     if (image == null) {
       return null;
     }
-    final ImageElement result = new ImageElement();
-    if (image.getType() != null) {
-      result.setFormat(image.getType().name());
-    }
-
-    if (image.getData() != null) {
-      result.setData(encoder.encodeToString(image.getData()));
-    }
-    return result;
+    return imageElement(image);
   }
 
   @InheritInverseConfiguration
@@ -85,4 +78,24 @@ public interface Registrations {
     @Mapping(source = "user.details.lastname", target = "principal.lastName"),
   })
   RegistrationConfirmationElement toConfirmation(RegistrationRequest signup);
+
+  default ImageElement imageElement(Image image) {
+    if (image == null) {
+      return null;
+    }
+
+    final ImageElement result = new ImageElement();
+    if (image.getType() != null) {
+      result.setFormat(image.getType().name());
+    }
+
+    if (image.getData() != null) {
+      result.setData(encoder.encodeToString(image.getData()));
+    }
+
+    if (image.getData() != null) {
+      result.setData(encoder.encodeToString(image.getData()));
+    }
+    return result;
+  }
 }
