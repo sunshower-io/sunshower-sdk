@@ -10,6 +10,7 @@ import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
 import io.sunshower.service.signup.RegistrationRequest;
+import java.util.Locale;
 import javax.inject.Inject;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,8 +38,29 @@ class RegistrationsTest {
             .lastName("haswell")
             .phoneNumber("frapper")
             .username("josiah")
+            .locale(Locale.CANADA)
             .create();
     user = registrations.toUser(registration);
+  }
+
+  @Test
+  void ensureLocaleIsCopiedCorrectly() {
+    assertThat(user.getDetails().getLocale(), is(Locale.CANADA));
+  }
+
+  @Test
+  void ensurePhoneNumberIsCopiedCorrectly() {
+    assertThat(user.getDetails().getPhoneNumber(), is("frapper"));
+  }
+
+  @Test
+  void ensureLastNameIsCopiedCorrectly() {
+    assertThat(user.getDetails().getLastname(), is("haswell"));
+  }
+
+  @Test
+  void ensureFirstNameIsCopiedCorrectly() {
+    assertThat(user.getDetails().getFirstname(), is("josiah"));
   }
 
   @Test

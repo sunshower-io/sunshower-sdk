@@ -43,6 +43,12 @@ class UsersTest {
   }
 
   @Test
+  void ensureDetailsIdIsCopiedCorrectly() {
+    principalElement = users.completeElement(user);
+    assertThat(principalElement.getDetailsId(), is(user.getDetails().getId()));
+  }
+
+  @Test
   public void ensureEmailAddressIsCopiedCorrectly() {
 
     principalElement = users.toElement(user);

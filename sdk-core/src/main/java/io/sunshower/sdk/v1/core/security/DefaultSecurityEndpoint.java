@@ -16,6 +16,7 @@ import io.sunshower.service.ext.IconService;
 import java.util.Date;
 import javax.inject.Inject;
 import lombok.val;
+import org.springframework.transaction.annotation.Transactional;
 
 public class DefaultSecurityEndpoint implements SecurityEndpoint {
 
@@ -30,6 +31,7 @@ public class DefaultSecurityEndpoint implements SecurityEndpoint {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public AuthenticationElement authenticate(AuthenticationRequest request) {
     val user = new User();
     user.setUsername(request.getUsername());
@@ -38,11 +40,12 @@ public class DefaultSecurityEndpoint implements SecurityEndpoint {
     val result = authentications.toElement(authenticate);
     val imageElement =
         iconService.getIcon(Details.class, authenticate.getUser().getDetails().getId(), true);
-    result.getPrincipal().setImageElement(registrations.imageElement(imageElement));
+    result.getPrincipal().setImage(registrations.imageElement(imageElement));
     return result;
   }
 
   @Override
+  @Transactional(readOnly = true)
   public AuthenticationElement authenticate(AuthenticationTokenElement token) {
     final String value = token.getValue();
     if (value == null || value.isEmpty()) {
@@ -50,6 +53,10 @@ public class DefaultSecurityEndpoint implements SecurityEndpoint {
     }
     Authentication validate =
         authenticationService.validate(new Token(token.getValue(), new Date()));
-    return authentications.toElement(validate);
+    val result = authentications.toElement(validate);
+    val imageElement =
+        iconService.getIcon(Details.class, validate.getUser().getDetails().getId(), true);
+    result.getPrincipal().setImage(registrations.imageElement(imageElement));
+    return result;
   }
 }

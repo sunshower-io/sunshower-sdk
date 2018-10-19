@@ -1,6 +1,7 @@
 package io.sunshower.sdk.v1.model.core;
 
 import io.sunshower.model.core.Image;
+import io.sunshower.model.core.auth.ImageType;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
@@ -22,6 +23,7 @@ import org.mapstruct.*;
 )
 public interface Registrations {
   Base64.Encoder encoder = Base64.getEncoder();
+  Base64.Decoder decoder = Base64.getDecoder();
 
   @Mappings({})
   default List<String> productToNames(Set<Product> products) {
@@ -34,7 +36,11 @@ public interface Registrations {
   @Mappings({
     @Mapping(target = "id", ignore = true),
     @Mapping(source = "username", target = "username"),
-    @Mapping(source = "emailAddress", target = "details.emailAddress")
+    @Mapping(source = "firstName", target = "details.name"),
+    @Mapping(source = "locale", target = "details.locale"),
+    @Mapping(source = "lastName", target = "details.lastname"),
+    @Mapping(source = "emailAddress", target = "details.emailAddress"),
+    @Mapping(source = "phoneNumber", target = "details.phoneNumber")
   })
   User toUser(RegistrationRequestElement request);
 
@@ -84,7 +90,7 @@ public interface Registrations {
       return null;
     }
 
-    final ImageElement result = new ImageElement();
+    val result = new ImageElement();
     if (image.getType() != null) {
       result.setFormat(image.getType().name());
     }
@@ -95,6 +101,46 @@ public interface Registrations {
 
     if (image.getData() != null) {
       result.setData(encoder.encodeToString(image.getData()));
+    }
+    return result;
+  }
+
+  default Image toImage(ImageElement el) {
+    if (el == null) {
+      return null;
+    }
+    val data = el.getData();
+    val result = new Image();
+    if (data != null) {
+      result.setData(decoder.decode(data));
+    }
+    val type = el.getFormat();
+    if (type != null) {
+      val normalized = type.toLowerCase().trim();
+      switch (normalized) {
+        case "svg":
+          {
+            result.setType(ImageType.SVG);
+            break;
+          }
+        case "gif":
+          {
+            result.setType(ImageType.GIF);
+            break;
+          }
+
+        case "png":
+          {
+            result.setType(ImageType.PNG);
+            break;
+          }
+
+        case "jpg":
+          {
+            result.setType(ImageType.JPG);
+            break;
+          }
+      }
     }
     return result;
   }

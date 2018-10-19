@@ -12,6 +12,10 @@ import javax.ws.rs.PathParam;
 public interface IconEndpoint {
 
   @PUT
+  @Path("reset")
+  void reset();
+
+  @PUT
   @Path("{id}")
   void setIcon(@PathParam("id") Identifier id, ChangeIconRequest request);
 

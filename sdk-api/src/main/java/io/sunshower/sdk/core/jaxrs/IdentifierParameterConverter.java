@@ -3,10 +3,15 @@ package io.sunshower.sdk.core.jaxrs;
 import io.sunshower.common.Identifier;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Locale;
 import javax.ws.rs.ext.ParamConverter;
 import javax.ws.rs.ext.ParamConverterProvider;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * Eh. Not properly named--this is the place to put all parameter converters. Don't want to refactor
+ * right now.
+ */
 @Provider
 public class IdentifierParameterConverter implements ParamConverterProvider {
 
@@ -16,6 +21,8 @@ public class IdentifierParameterConverter implements ParamConverterProvider {
       Class<T> rawType, Type genericType, Annotation[] annotations) {
     if (Identifier.class.equals(rawType)) {
       return (ParamConverter<T>) new IdentifierParamConverter();
+    } else if (Locale.class.equals(rawType)) {
+      return (ParamConverter<T>) new LocaleParameterConverter();
     }
     return null;
   }

@@ -83,8 +83,9 @@ class DefaultSecurityEndpointTest extends SdkTest {
         Authenticate.as("hozesta").withPassword("whatever").at(securityEndpoint);
     assertThat(result, is(not(nullValue())));
     assertThat(result.getToken(), is(not(nullValue())));
-    assertThat(result.getPrincipal().getImageElement(), is(not(nullValue())));
+    assertThat(result.getPrincipal().getImage(), is(not(nullValue())));
     securityEndpoint.validate(result.getToken());
+    assertThat(result.getPrincipal().getImage(), is(not(nullValue())));
   }
 
   @Test
