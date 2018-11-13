@@ -19,8 +19,10 @@ import lombok.val;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.security.acls.model.Permission;
+import org.springframework.transaction.annotation.Transactional;
 
 @Path("icon")
+@Transactional
 public class DefaultIconEndpoint implements IconEndpoint {
 
   @Inject private Session session;

@@ -3,12 +3,12 @@ package io.sunshower.sdk.v1.endpoints.ext;
 import io.sunshower.common.Identifier;
 import io.sunshower.sdk.v1.model.ext.ChangeIconRequest;
 import io.sunshower.sdk.v1.model.ext.ImageElement;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("icon")
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface IconEndpoint {
 
   @PUT
