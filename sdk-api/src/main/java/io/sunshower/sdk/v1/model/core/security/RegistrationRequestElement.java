@@ -1,10 +1,14 @@
 package io.sunshower.sdk.v1.model.core.security;
 
+import io.sunshower.sdk.core.jaxrs.LocaleAdapter;
 import io.sunshower.sdk.v1.model.core.element.AbstractElement;
+import io.sunshower.sdk.v1.model.ext.ImageElement;
 import java.util.List;
+import java.util.Locale;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.*;
 
 @Getter
@@ -35,6 +39,12 @@ public class RegistrationRequestElement extends AbstractElement<RegistrationRequ
 
   @XmlElement(name = "last-name")
   private String lastName;
+
+  @XmlAttribute(name = "locale")
+  @XmlJavaTypeAdapter(LocaleAdapter.class)
+  private Locale locale;
+
+  @XmlElement private ImageElement image;
 
   @XmlElement private List<String> products;
 

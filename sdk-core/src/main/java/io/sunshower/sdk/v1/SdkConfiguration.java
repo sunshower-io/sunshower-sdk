@@ -17,6 +17,8 @@ import io.sunshower.sdk.v1.core.security.DefaultUserEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
+import io.sunshower.sdk.v1.endpoints.ext.IconEndpoint;
+import io.sunshower.sdk.v1.ext.DefaultIconEndpoint;
 import io.sunshower.service.serialization.DynamicJaxrsProviders;
 import io.sunshower.service.serialization.DynamicResolvingMoxyJsonProvider;
 import javax.naming.InitialContext;
@@ -30,6 +32,11 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 @Import(MappingConfiguration.class)
 public class SdkConfiguration {
+
+  @Bean
+  public IconEndpoint iconEndpoint() {
+    return new DefaultIconEndpoint();
+  }
 
   @Bean
   public ExtensionEndpoint extensionEndpoint() {

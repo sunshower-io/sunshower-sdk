@@ -5,26 +5,32 @@ import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.sunshower.core.security.crypto.EncryptionService;
+import io.sunshower.model.core.auth.Role;
 import io.sunshower.sdk.test.SdkTest;
-import io.sunshower.sdk.test.TestRoles;
 import io.sunshower.sdk.v1.endpoints.core.security.SecurityEndpoint;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
 import io.sunshower.sdk.v1.model.core.faults.authorization.AuthenticationFailedException;
 import io.sunshower.sdk.v1.model.core.security.*;
+import io.sunshower.service.security.PermissionsService;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.security.acls.model.Permission;
+import org.springframework.test.annotation.Rollback;
 
-@Sql(
-  executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-  scripts = "classpath:/sql/drop-roles.sql"
-)
+// @Sql(
+//  executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+//  scripts = "classpath:/sql/drop-roles.sql"
+// )
+@Rollback
 class DefaultSecurityEndpointTest extends SdkTest {
 
   @PersistenceContext private EntityManager entityManager;
@@ -34,6 +40,7 @@ class DefaultSecurityEndpointTest extends SdkTest {
   @Inject private SignupEndpoint endpoint;
 
   @Inject private EncryptionService encryptionService;
+  @Inject private PermissionsService<Permission> permissionsService;
 
   @Test
   @BeforeEach
@@ -71,41 +78,49 @@ class DefaultSecurityEndpointTest extends SdkTest {
 
   @Test
   public void ensureLoggingInAsExistingUserProducesToken() {
-    withPrincipals(TestRoles.administrator1())
-        .perform(
-            () -> {
-              AuthenticationElement result =
-                  Authenticate.as("administrator1").withPassword("frapadap1").at(securityEndpoint);
-              assertThat(result, is(not(nullValue())));
-              assertThat(result.getToken(), is(not(nullValue())));
-              securityEndpoint.validate(result.getToken());
-            });
+    register();
+    AuthenticationElement result =
+        Authenticate.as("hozesta").withPassword("whatever").at(securityEndpoint);
+    assertThat(result, is(not(nullValue())));
+    assertThat(result.getToken(), is(not(nullValue())));
+    assertThat(result.getPrincipal().getImage(), is(not(nullValue())));
+    securityEndpoint.validate(result.getToken());
+    assertThat(result.getPrincipal().getImage(), is(not(nullValue())));
   }
 
   @Test
   public void ensureAuthenticatingViaTokenProducesPrincipalWithCorrectRoles() {
-    withPrincipals(TestRoles.administrator1())
-        .perform(
-            () -> {
-              AuthenticationElement result =
-                  Authenticate.as("administrator1").withPassword("frapadap1").at(securityEndpoint);
+    RegistrationConfirmationElement result = register();
 
-              final PrincipalElement principalElement = result.getPrincipal();
+    permissionsService.impersonate(
+        () -> {
+          final PrincipalElement principalElement = result.getPrincipal();
 
-              assertThat(principalElement, is(not(nullValue())));
-              assertThat(principalElement.getUsername(), is("administrator1"));
-              // TODO: FIGURE OUT
-              //              assertThat(principalElement.getRoles().size(), is(3));
-              Set<String> roleNames =
-                  principalElement
-                      .getRoles()
-                      .stream()
-                      .map(RoleElement::getAuthority)
-                      .collect(Collectors.toSet());
-              //              assertThat(
-              //                  roleNames,
-              //                  is(new HashSet<>(Arrays.asList("admin", "tenant:user",
-              // "tenant:admin"))));
-            });
+          assertThat(principalElement, is(not(nullValue())));
+          assertThat(principalElement.getUsername(), is("hozesta"));
+          assertThat(principalElement.getRoles().size(), is(1));
+          Set<String> roleNames =
+              principalElement
+                  .getRoles()
+                  .stream()
+                  .map(RoleElement::getAuthority)
+                  .collect(Collectors.toSet());
+          assertThat(roleNames, is(new HashSet<>(Arrays.asList("tenant:user"))));
+        },
+        new Role("admin"));
+  }
+
+  private RegistrationConfirmationElement register() {
+    val user =
+        RegistrationRequestElement.newRegistration()
+            .firstName("josiah")
+            .password("whatever")
+            .username("hozesta")
+            .emailAddress("joe@whatever.com")
+            .create();
+    val result = endpoint.signup(user);
+    permissionsService.impersonate(
+        () -> endpoint.approve(result.getRegistrationId()), new Role("admin"));
+    return result;
   }
 }

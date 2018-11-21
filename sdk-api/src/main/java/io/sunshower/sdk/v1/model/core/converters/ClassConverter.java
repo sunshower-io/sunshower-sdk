@@ -4,7 +4,6 @@ import io.sunshower.sdk.v1.model.core.faults.InvalidElementException;
 import io.sunshower.sdk.v1.model.core.faults.NullElementException;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/** Created by haswell on 3/17/17. */
 public class ClassConverter extends XmlAdapter<String, Class<?>> {
   @Override
   public String marshal(Class<?> v) throws Exception {

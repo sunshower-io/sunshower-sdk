@@ -1,6 +1,7 @@
 package io.sunshower.sdk.v1.core.security;
 
 import io.sunshower.common.Identifier;
+import io.sunshower.core.security.UserService;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.lang.IdentifierElement;
 import io.sunshower.sdk.v1.endpoints.core.security.SignupEndpoint;
@@ -10,6 +11,7 @@ import io.sunshower.sdk.v1.model.core.faults.DuplicateElementException;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationConfirmationElement;
 import io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement;
+import io.sunshower.service.ext.IconService;
 import io.sunshower.service.signup.RegistrationRequest;
 import io.sunshower.service.signup.SignupService;
 import java.util.Collections;
@@ -21,16 +23,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.ws.rs.core.Response;
+import lombok.val;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class DefaultSignupEndpoint implements SignupEndpoint {
 
-  @PersistenceContext private EntityManager entityManager;
+  @Inject private Users users;
   @Inject private Registrations registrations;
   @Inject private SignupService signupService;
-  @Inject private Users users;
+  @Inject private IconService iconService;
+  @Inject private UserService userService;
+  @PersistenceContext private EntityManager entityManager;
 
   @Override
   public RegistrationConfirmationElement signup(RegistrationRequestElement request) {
@@ -38,7 +43,12 @@ public class DefaultSignupEndpoint implements SignupEndpoint {
         request.getProducts() == null ? Collections.emptyList() : request.getProducts();
     try {
       final User user = registrations.toUser(request);
+      checkUser(user);
+
       final RegistrationRequest signup = signupService.signup(user, productIds);
+      val saved = userService.findByUsername(user.getUsername());
+      saved.getDetails().setImage(iconService.iconDirect(saved.getUsername(), 64, 64));
+
       final RegistrationConfirmationElement registrationConfirmationElement =
           registrations.toConfirmation(signup);
       signup.getProducts();
@@ -71,6 +81,7 @@ public class DefaultSignupEndpoint implements SignupEndpoint {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public List<RegistrationRequestElement> list() {
     return signupService
         .pendingRegistrations()
@@ -107,5 +118,14 @@ public class DefaultSignupEndpoint implements SignupEndpoint {
       return registrations.toElement(request);
     }
     throw new NoSuchElementException("No registration request with that id");
+  }
+
+  private void checkUser(User user) {
+    if (user.getUsername() == null) {
+      throw new IllegalArgumentException("Username must not be null");
+    }
+    if (user.getPassword() == null) {
+      throw new IllegalArgumentException("Password must not be null");
+    }
   }
 }

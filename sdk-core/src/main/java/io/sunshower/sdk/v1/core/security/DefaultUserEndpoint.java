@@ -2,18 +2,22 @@ package io.sunshower.sdk.v1.core.security;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.core.security.UserService;
+import io.sunshower.core.security.crypto.EncryptionService;
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.model.core.auth.User;
 import io.sunshower.sdk.lang.BooleanElement;
 import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
+import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.core.Users;
 import io.sunshower.sdk.v1.model.core.security.PrincipalElement;
-import java.util.ArrayList;
-import java.util.List;
+import io.sunshower.sdk.v1.model.ext.LocaleElement;
+import java.util.*;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import lombok.val;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +25,68 @@ public class DefaultUserEndpoint implements UserEndpoint {
 
   @Inject private Users users;
   @Inject private UserService userService;
+  @Inject private Registrations registrations;
+  @Inject private EncryptionService encryptionService;
   @PersistenceContext private EntityManager entityManager;
+
+  @Override
+  public List<LocaleElement> getLocales() {
+    return getLocales(Locale.getDefault());
+  }
+
+  @Override
+  public List<LocaleElement> getLocales(Locale locale) {
+    return Arrays.stream(Locale.getAvailableLocales())
+        .map(this::mapLocale)
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  @PreAuthorize("hasPermission(#userId, 'io.sunshower.model.core.auth.User', 'READ')")
+  public PrincipalElement get(Identifier userId) {
+    val user = userService.get(userId);
+    val userEl = users.completeElement(user);
+    userEl.setImage(registrations.imageElement(user.getDetails().getImage()));
+    return userEl;
+  }
+
+  @Override
+  @Transactional
+  @PreAuthorize("hasPermission(#userId, 'io.sunshower.model.core.auth.User', 'WRITE')")
+  public void update(Identifier userId, PrincipalElement element) {
+    val user = entityManager.find(User.class, userId);
+    if (user == null) {
+      throw new EntityNotFoundException("No user with that ID");
+    }
+    val details = user.getDetails();
+
+    if (dirty(details.getFirstname(), element.getFirstName())) {
+      details.setFirstname(element.getFirstName());
+    }
+
+    if (dirty(details.getLastname(), element.getLastName())) {
+      details.setLastname(element.getLastName());
+    }
+
+    if (dirty(details.getLocale(), element.getLocale())) {
+      details.setLocale(element.getLocale());
+    }
+
+    if (dirty(details.getPhoneNumber(), element.getPhoneNumber())) {
+      details.setPhoneNumber(element.getPhoneNumber());
+    }
+
+    if (element.getPassword() != null) {
+      user.setPassword(encryptionService.encrypt(element.getPassword()));
+    }
+
+    entityManager.flush();
+  }
+
+  private boolean dirty(Object source, Object target) {
+    return target != null && !Objects.equals(source, target);
+  }
 
   @Override
   @Transactional
@@ -43,5 +108,12 @@ public class DefaultUserEndpoint implements UserEndpoint {
   public List<PrincipalElement> list(boolean active) {
     List<User> results = active ? userService.activeUsers() : userService.inactiveUsers();
     return results.stream().map(users::toElement).collect(Collectors.toList());
+  }
+
+  private LocaleElement mapLocale(Locale locale) {
+    final LocaleElement el = new LocaleElement();
+    el.setDisplayName(locale.getDisplayName());
+    el.setLocaleKey(locale.toLanguageTag());
+    return el;
   }
 }

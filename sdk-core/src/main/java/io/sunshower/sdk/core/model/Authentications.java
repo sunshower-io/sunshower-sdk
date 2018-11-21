@@ -16,7 +16,7 @@ import org.mapstruct.*;
 )
 public interface Authentications {
 
-  @Mappings(@Mapping(source = "principal", target = "user"))
+  @Mappings(@Mapping(source = "principal", target = "user", qualifiedByName = "toElement"))
   Authentication toModel(AuthenticationElement element);
 
   @InheritInverseConfiguration
