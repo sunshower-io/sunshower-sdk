@@ -34,12 +34,7 @@ allprojects {
     }
 
     def repos = [
-            'http://repo.spring.io/snapshot',
-            "http://repo.spring.io/libs-milestone",
-            'http://artifacts.sunshower.io/repository/sunshower-snapshots',
-            'http://artifacts.sunshower.io/repository/sunshower-releases',
-            "http://oss.sonatype.org/content/repositories/snapshots",
-            "http://www.gridgainsystems.com/nexus/content/repositories/external"
+            'http://artifacts.sunshower.io/repository/sunshower-cache',
     ]
 
 
@@ -65,16 +60,6 @@ allprojects {
 
     repositories {
         mavenLocal()
-        mavenCentral()
-
-        maven {
-            url mavenRepositoryUrl
-
-            credentials {
-                username mavenRepositoryUsername
-                password mavenRepositoryPassword
-            }
-        }
         repos.each { repo ->
             maven { url "$repo" }
         }
@@ -84,7 +69,7 @@ allprojects {
         imports {
             mavenBom("io.sunshower.sdk:bom-imported:${version}") {
                 bomProperties([
-                        'env.version': '1.0.11.Final'
+                        'env.version': '1.0.13-SNAPSHOT'
                 ])
             }
         }
@@ -168,11 +153,9 @@ task archiveReports(type: Zip) {
 }
 
 assemble.dependsOn cloverAggregateReports
-assemble.dependsOn 'aggregateJavadocs'
 
 assemble.dependsOn archiveReports
 archiveReports.mustRunAfter cloverAggregateReports
-archiveReports.mustRunAfter 'aggregateJavadocs'
 
 
-defaultTasks 'clean', 'build', 'cloverAggregateReports', 'aggregateJavadocs'
+defaultTasks 'clean', 'build', 'cloverAggregateReports'
