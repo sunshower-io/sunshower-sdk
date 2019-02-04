@@ -14,5 +14,7 @@ public enum PropertyType {
   @XmlEnumValue("secret")
   Secret,
   @XmlEnumValue("class")
-  Class
+  Class,
+  @XmlEnumValue("time")
+  Time
 }
