@@ -2,7 +2,9 @@ package io.sunshower.sdk.v1.ext;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.core.security.UserService;
+import io.sunshower.lang.tuple.Pair;
 import io.sunshower.model.core.ImageAware;
+import io.sunshower.model.core.events.ImageChangedEvent;
 import io.sunshower.sdk.v1.endpoints.ext.IconEndpoint;
 import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.ext.ChangeIconRequest;
@@ -16,6 +18,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Path;
 import lombok.val;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.security.acls.model.Permission;
@@ -24,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Path("icon")
 @Transactional
 public class DefaultIconEndpoint implements IconEndpoint {
+
+  @Inject private ApplicationEventPublisher publisher;
 
   @Inject private Session session;
   @Inject private UserService userService;
@@ -47,18 +52,19 @@ public class DefaultIconEndpoint implements IconEndpoint {
 
   @Override
   public void setIcon(Identifier id, ChangeIconRequest request) {
-    val imgAware = load(id, request.getTargetType());
+    Pair<ImageAware, Class<? extends ImageAware>> loaded = load(id, request.getTargetType());
     val image = registrations.toImage(request.getImageElement());
-    imgAware.setImage(image);
+    loaded.fst.setImage(image);
     entityManager.flush();
+    publisher.publishEvent(new ImageChangedEvent(id, loaded.snd, this));
   }
 
   @Override
   public ImageElement getIcon(Class<?> type, Identifier id) {
-    return registrations.imageElement(load(id, type).getImage());
+    return registrations.imageElement(load(id, type).fst.getImage());
   }
 
-  private ImageAware load(Identifier id, Class<?> type) {
+  private Pair<ImageAware, Class<? extends ImageAware>> load(Identifier id, Class<?> type) {
     if (!ImageAware.class.isAssignableFrom(type)) {
       throw new IllegalStateException("Can't change the image of a type that doesn't have one");
     }
@@ -67,6 +73,6 @@ public class DefaultIconEndpoint implements IconEndpoint {
       throw new EntityNotFoundException("No image aware with that id");
     }
     permissionsService.checkPermission(o, BasePermission.WRITE);
-    return o;
+    return Pair.of(o, o.getClass());
   }
 }
