@@ -37,11 +37,7 @@ public class DefaultSecurityEndpoint implements SecurityEndpoint {
     user.setUsername(request.getUsername());
     user.setPassword(request.getPassword());
     Authentication authenticate = authenticationService.authenticate(user);
-    val result = authentications.toElement(authenticate);
-    val imageElement =
-        iconService.getIcon(Details.class, authenticate.getUser().getDetails().getId(), true);
-    result.getPrincipal().setImage(registrations.imageElement(imageElement));
-    return result;
+    return configure(authenticate);
   }
 
   @Override
@@ -53,9 +49,13 @@ public class DefaultSecurityEndpoint implements SecurityEndpoint {
     }
     Authentication validate =
         authenticationService.validate(new Token(token.getValue(), new Date()));
-    val result = authentications.toElement(validate);
+    return configure(validate);
+  }
+
+  private AuthenticationElement configure(Authentication authenticate) {
+    val result = authentications.toElement(authenticate);
     val imageElement =
-        iconService.getIcon(Details.class, validate.getUser().getDetails().getId(), true);
+        iconService.getIcon(Details.class, authenticate.getUser().getDetails().getId(), true);
     result.getPrincipal().setImage(registrations.imageElement(imageElement));
     return result;
   }
