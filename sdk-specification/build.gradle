@@ -4,7 +4,6 @@ dependencies {
     compile 'io.sunshower.common:core'
     compile "org.springframework:spring-test"
     compile 'org.junit.jupiter:junit-jupiter-engine'
-    compile 'org.junit.vintage:junit-vintage-engine'
     compile "org.springframework.security:spring-security-test"
     compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
 }
