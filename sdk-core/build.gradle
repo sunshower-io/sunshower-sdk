@@ -38,7 +38,6 @@ dependencies {
     testCompile 'io.sunshower.test:test-ws'
     testCompile project(':sdk-specification')
     testCompile 'io.sunshower.test:test-persist'
-    testCompile 'org.junit.platform:junit-platform-runner'
     testCompile 'org.springframework:spring-test'
 
     testCompile 'org.springframework.security:spring-security-test'

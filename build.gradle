@@ -86,10 +86,14 @@ allprojects {
             compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
             compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
             testCompile 'javax.mail:mail'
-            testCompile('org.mockito:mockito-core')
-            testCompile('org.junit.platform:junit-platform-launcher')
-            testCompile('org.junit.platform:junit-platform-commons')
-            testCompile('org.junit.jupiter:junit-jupiter-engine')
+
+
+
+            testImplementation('org.hamcrest:hamcrest-core')
+            testImplementation('org.mockito:mockito-core')
+            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+            testImplementation 'org.junit.jupiter:junit-jupiter-api'
+
         }
     }
 
