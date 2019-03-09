@@ -43,6 +43,13 @@ class UsersTest {
   }
 
   @Test
+  void ensureFirstNameIsCopiedCorrectly() {
+    user.getDetails().setFirstname("blammut");
+    principalElement = users.completeElement(user);
+    assertThat(principalElement.getFirstName(), is("blammut"));
+  }
+
+  @Test
   void ensureDetailsIdIsCopiedCorrectly() {
     principalElement = users.completeElement(user);
     assertThat(principalElement.getDetailsId(), is(user.getDetails().getId()));
