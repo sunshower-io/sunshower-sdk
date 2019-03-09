@@ -5,6 +5,7 @@ import io.sunshower.core.security.UserService;
 import io.sunshower.core.security.crypto.EncryptionService;
 import io.sunshower.model.core.auth.Role;
 import io.sunshower.model.core.auth.User;
+import io.sunshower.model.core.events.CacheEvictionEvent;
 import io.sunshower.sdk.lang.BooleanElement;
 import io.sunshower.sdk.v1.endpoints.core.security.UserEndpoint;
 import io.sunshower.sdk.v1.model.core.Registrations;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import lombok.val;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,7 @@ public class DefaultUserEndpoint implements UserEndpoint {
   @Inject private UserService userService;
   @Inject private Registrations registrations;
   @Inject private EncryptionService encryptionService;
+  @Inject private ApplicationContext applicationContext;
   @PersistenceContext private EntityManager entityManager;
 
   @Override
@@ -81,6 +84,7 @@ public class DefaultUserEndpoint implements UserEndpoint {
       user.setPassword(encryptionService.encrypt(element.getPassword()));
     }
 
+    applicationContext.publishEvent(new CacheEvictionEvent(userId, User.class, this));
     entityManager.flush();
   }
 

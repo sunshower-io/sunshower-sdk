@@ -4,7 +4,7 @@ import io.sunshower.common.Identifier;
 import io.sunshower.core.security.UserService;
 import io.sunshower.lang.tuple.Pair;
 import io.sunshower.model.core.ImageAware;
-import io.sunshower.model.core.events.ImageChangedEvent;
+import io.sunshower.model.core.events.CacheEvictionEvent;
 import io.sunshower.sdk.v1.endpoints.ext.IconEndpoint;
 import io.sunshower.sdk.v1.model.core.Registrations;
 import io.sunshower.sdk.v1.model.ext.ChangeIconRequest;
@@ -56,7 +56,7 @@ public class DefaultIconEndpoint implements IconEndpoint {
     val image = registrations.toImage(request.getImageElement());
     loaded.fst.setImage(image);
     entityManager.flush();
-    publisher.publishEvent(new ImageChangedEvent(id, loaded.snd, this));
+    publisher.publishEvent(new CacheEvictionEvent(id, loaded.snd, this));
   }
 
   @Override
