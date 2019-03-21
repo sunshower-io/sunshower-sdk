@@ -36,9 +36,9 @@ public interface Registrations {
   @Mappings({
     @Mapping(target = "id", ignore = true),
     @Mapping(source = "username", target = "username"),
-    @Mapping(source = "firstName", target = "details.name"),
+    @Mapping(source = "firstName", target = "details.firstName"),
     @Mapping(source = "locale", target = "details.locale"),
-    @Mapping(source = "lastName", target = "details.lastname"),
+    @Mapping(source = "lastName", target = "details.lastName"),
     @Mapping(source = "emailAddress", target = "details.emailAddress"),
     @Mapping(source = "phoneNumber", target = "details.phoneNumber")
   })
@@ -80,8 +80,8 @@ public interface Registrations {
   @Mappings({
     @Mapping(source = "requestId", target = "registrationId"),
     @Mapping(source = "user.username", target = "principal.username"),
-    @Mapping(source = "user.details.firstname", target = "principal.firstName"),
-    @Mapping(source = "user.details.lastname", target = "principal.lastName"),
+    @Mapping(source = "user.details.firstName", target = "principal.firstName"),
+    @Mapping(source = "user.details.lastName", target = "principal.lastName"),
   })
   RegistrationConfirmationElement toConfirmation(RegistrationRequest signup);
 

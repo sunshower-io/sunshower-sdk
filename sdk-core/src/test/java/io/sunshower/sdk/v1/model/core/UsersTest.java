@@ -44,7 +44,7 @@ class UsersTest {
 
   @Test
   void ensureFirstNameIsCopiedCorrectly() {
-    user.getDetails().setFirstname("blammut");
+    user.getDetails().setFirstName("blammut");
     principalElement = users.completeElement(user);
     assertThat(principalElement.getFirstName(), is("blammut"));
   }

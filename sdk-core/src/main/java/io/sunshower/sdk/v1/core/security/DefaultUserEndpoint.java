@@ -64,12 +64,12 @@ public class DefaultUserEndpoint implements UserEndpoint {
     }
     val details = user.getDetails();
 
-    if (dirty(details.getFirstname(), element.getFirstName())) {
-      details.setFirstname(element.getFirstName());
+    if (dirty(details.getFirstName(), element.getFirstName())) {
+      details.setFirstName(element.getFirstName());
     }
 
-    if (dirty(details.getLastname(), element.getLastName())) {
-      details.setLastname(element.getLastName());
+    if (dirty(details.getLastName(), element.getLastName())) {
+      details.setLastName(element.getLastName());
     }
 
     if (dirty(details.getLocale(), element.getLocale())) {
