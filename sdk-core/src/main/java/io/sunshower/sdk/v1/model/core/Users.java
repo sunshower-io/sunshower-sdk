@@ -30,7 +30,7 @@ public interface Users {
     @Mapping(target = "password", ignore = true),
     @Mapping(source = "user.details.emailAddress", target = "emailAddress"),
     @Mapping(source = "user.details.phoneNumber", target = "phoneNumber"),
-    @Mapping(source = "user.details.lastname", target = "lastName"),
+    @Mapping(source = "user.details.lastName", target = "lastName"),
     @Mapping(source = "user.details.name", target = "firstName"),
     @Mapping(source = "user.details.activeUntil", target = "activeUntil"),
     @Mapping(source = "user.details.registered", target = "registered"),

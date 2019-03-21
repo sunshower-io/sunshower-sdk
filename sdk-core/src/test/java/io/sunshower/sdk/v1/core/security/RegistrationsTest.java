@@ -55,12 +55,12 @@ class RegistrationsTest {
 
   @Test
   void ensureLastNameIsCopiedCorrectly() {
-    assertThat(user.getDetails().getLastname(), is("haswell"));
+    assertThat(user.getDetails().getLastName(), is("haswell"));
   }
 
   @Test
   void ensureFirstNameIsCopiedCorrectly() {
-    assertThat(user.getDetails().getFirstname(), is("josiah"));
+    assertThat(user.getDetails().getFirstName(), is("josiah"));
   }
 
   @Test
@@ -190,8 +190,8 @@ class RegistrationsTest {
     request.setRequestId("hello");
     final User user = new User();
     user.setUsername("frapper");
-    user.getDetails().setFirstname("josiah");
-    user.getDetails().setLastname("haswell");
+    user.getDetails().setFirstName("josiah");
+    user.getDetails().setLastName("haswell");
     request.setUser(user);
     RegistrationConfirmationElement element = registrations.toConfirmation(request);
     assertThat(element.getPrincipal().getUsername(), is("frapper"));
