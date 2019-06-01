@@ -1,46 +1,49 @@
 dependencies {
 
-    implementation 'org.jboss.resteasy:resteasy-jaxrs'
+    api project(':sdk-api')
     
-    compile project(':sdk-api')
 
-    compileOnly 'io.sunshower.kernel:kernel-api'
-    testCompile 'io.sunshower.kernel:kernel-api'
-
-    compile 'io.sunshower.common:core'
-    compile 'io.sunshower.common:common-ws'
-    compile 'io.sunshower.common:reflect'
-
-    compile 'io.sunshower.service:service-api'
-    compile 'io.sunshower.service:service-core'
-    compile 'io.sunshower.service:service-security'
-
-    compile 'org.mapstruct:mapstruct-jdk8'
-
-    apt 'org.mapstruct:mapstruct-processor'
-    compile 'org.mapstruct:mapstruct-processor'
-
-
-    compile 'io.sunshower.persist:persist-jpa'
-
-    compile 'io.sunshower.persist:persist-hibernate'
-    compile 'org.springframework:spring-orm'
-
-
-
-    compile 'org.springframework.security:spring-security-acl'
-    compile 'org.springframework.security:spring-security-config'
-    compile 'javax.validation:validation-api'
-
-    compile 'commons-fileupload:commons-fileupload'
-    compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-
-    testCompile 'io.sunshower.test:test-ws'
-    testCompile project(':sdk-specification')
-    testCompile 'io.sunshower.test:test-persist'
-    testCompile 'org.springframework:spring-test'
-
-    testCompile 'org.springframework.security:spring-security-test'
+//    implementation 'org.jboss.resteasy:resteasy-jaxrs'
+//
+//    compile project(':sdk-api')
+//
+//    compileOnly 'io.sunshower.kernel:kernel-api'
+//    testCompile 'io.sunshower.kernel:kernel-api'
+//
+//    compile 'io.sunshower.common:core'
+//    compile 'io.sunshower.common:common-ws'
+//    compile 'io.sunshower.common:reflect'
+//
+//    compile 'io.sunshower.service:service-api'
+//    compile 'io.sunshower.service:service-core'
+//    compile 'io.sunshower.service:service-security'
+//
+//    compile 'org.mapstruct:mapstruct-jdk8'
+//
+//    apt 'org.mapstruct:mapstruct-processor'
+//    compile 'org.mapstruct:mapstruct-processor'
+//
+//
+//    compile 'io.sunshower.persist:persist-jpa'
+//
+//    compile 'io.sunshower.persist:persist-hibernate'
+//    compile 'org.springframework:spring-orm'
+//
+//
+//
+//    compile 'org.springframework.security:spring-security-acl'
+//    compile 'org.springframework.security:spring-security-config'
+//    compile 'javax.validation:validation-api'
+//
+//    compile 'commons-fileupload:commons-fileupload'
+//    compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+//
+//    testCompile 'io.sunshower.test:test-ws'
+//    testCompile project(':sdk-specification')
+//    testCompile 'io.sunshower.test:test-persist'
+//    testCompile 'org.springframework:spring-test'
+//
+//    testCompile 'org.springframework.security:spring-security-test'
 
 
 }
