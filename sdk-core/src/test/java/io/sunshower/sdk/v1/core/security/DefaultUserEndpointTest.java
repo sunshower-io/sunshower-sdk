@@ -24,7 +24,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.val;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -256,7 +255,6 @@ public class DefaultUserEndpointTest extends SdkTest {
             });
   }
 
-  @NotNull
   private User createInactiveUser() {
     final User inactiveUser = new User();
     inactiveUser.setActive(false);

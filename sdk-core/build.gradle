@@ -1,9 +1,35 @@
 dependencies {
 
     api project(':sdk-api')
-    
 
-//    implementation 'org.jboss.resteasy:resteasy-jaxrs'
+    implementation 'io.sunshower.common:lang'
+    implementation 'io.sunshower.common:reflect'
+    implementation 'io.sunshower.common:common-ws'
+
+
+
+    implementation 'org.mapstruct:mapstruct-jdk8'
+    implementation 'io.sunshower.kernel:kernel-api'
+    implementation 'org.jboss.resteasy:resteasy-jaxrs'
+    implementation 'io.sunshower.service:service-core'
+    implementation 'io.sunshower.service:service-common'
+    implementation 'io.sunshower.service:service-security'
+
+
+
+
+    [
+            'infinispan-core',
+            'infinispan-hibernate-cache-v53'
+    ].each {
+        implementation "org.infinispan:$it:9.4.14.Final"
+    }
+
+    annotationProcessor 'org.mapstruct:mapstruct-processor'
+
+    testImplementation 'io.sunshower.test:test-ws'
+    testImplementation 'io.sunshower.test:test-persist'
+
 //
 //    compile project(':sdk-api')
 //
@@ -18,7 +44,6 @@ dependencies {
 //    compile 'io.sunshower.service:service-core'
 //    compile 'io.sunshower.service:service-security'
 //
-//    compile 'org.mapstruct:mapstruct-jdk8'
 //
 //    apt 'org.mapstruct:mapstruct-processor'
 //    compile 'org.mapstruct:mapstruct-processor'
