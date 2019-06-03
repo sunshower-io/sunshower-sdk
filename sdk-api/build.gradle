@@ -1,13 +1,6 @@
 dependencies {
+    api project(':sdk-common')
+    api 'javax.servlet:javax.servlet-api'
 
-    compile 'javax.servlet:javax.servlet-api'
-
-    compile project(':sdk-common')
-
-    compile 'io.sunshower.common:core'
-    
-    compile 'org.eclipse.persistence:org.eclipse.persistence.core'
-
-    testCompile 'io.sunshower.test:test-common'
-    testCompile 'io.sunshower.test:test-persist'
+    testImplementation 'io.sunshower.test:test-common'
 }

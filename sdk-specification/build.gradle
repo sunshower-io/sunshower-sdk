@@ -1,8 +1,6 @@
 dependencies {
-    compile project(':sdk-api')
+    api project(':sdk-api')
 
-    compile 'io.sunshower.common:core'
-    compile "org.springframework:spring-test"
-    compile "org.springframework.security:spring-security-test"
-    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
+    implementation 'io.sunshower.common:core'
+    testImplementation 'io.sunshower.test:test-persistr'
 }
